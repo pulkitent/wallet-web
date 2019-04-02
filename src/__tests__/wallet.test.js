@@ -2,7 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 import Wallet from "../Wallet";
 import WalletModel from "../WalletModel";
-import LowBalanceMessage from "../LowBalanceMessage";
 
 beforeAll(() => {
   WalletModel.fetch = jest.fn(() => Promise.resolve(new WalletModel({})));
@@ -35,13 +34,6 @@ describe("Wallet", () => {
     const balance = wallet.find("#balanceAmount");
 
     expect(balance.text()).toContain(2000);
-  });
-
-  it("should render LowBalanceMessage component", async () => {
-    const wallet = shallow(<Wallet/>);
-    const lowBalance = wallet.find(LowBalanceMessage);
-
-    expect(lowBalance).toHaveLength(1);
   });
 
   it("should have a low message alert with wallet balance 10 INR", async () => {
