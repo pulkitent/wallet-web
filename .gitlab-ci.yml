@@ -23,4 +23,4 @@ pages:
     paths:
       - public # mandatory, other folder won't work
   only:
-    - feature/US01-Balance # or dev, the branch you want to publish
+    - master # or dev, the branch you want to publish
