@@ -1,0 +1,26 @@
+# Using the node alpine image to build the React app
+image: node:alpine
+
+# Cache node modules - speeds up future builds
+cache:
+  paths:
+    - node_modules
+
+# Name the stages involved in the pipeline
+stages:
+  - deploy
+
+# Job name for gitlab to recognise this results in assets for Gitlab Pages
+# https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
+pages:
+  stage: deploy
+  script:
+    - yarn install
+    - yarn build
+    - rm -rf public
+    - mv build public
+  artifacts:
+    paths:
+      - public # mandatory, other folder won't work
+  only:
+    - master # or dev, the branch you want to publish
