@@ -1,12 +1,16 @@
 import axios from "axios";
 
 export default class WalletModel {
-  constructor({id, name, balance}) {
+  constructor({ id, name, balance }) {
     this._balance = balance;
   }
 
   get balance() {
     return this._balance;
+  }
+
+  isBalanceLow() {
+    return this._balance <= 10;
   }
 
   static async fetch(id) {

@@ -13,10 +13,6 @@ export default class Wallet extends React.Component {
     });
   }
 
-  isBalanceLow() {
-    return this.state.model.balance <= 10;
-  }
-
   renderLowBalanceMessage() {
     return <h5 style={{ color: "red" }}>Low Balance</h5>;
   }
@@ -25,7 +21,7 @@ export default class Wallet extends React.Component {
     return <div>
       <h1 id='balance'> Balance</h1>
       <h2 id='balanceAmount'>₹ {this.state.model.balance} </h2>
-      {this.isBalanceLow() ? this.renderLowBalanceMessage() : ""}
+      {this.state.model.isBalanceLow() ? this.renderLowBalanceMessage() : ""}
     </div>;
   }
 }
