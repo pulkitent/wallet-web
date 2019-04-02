@@ -8,19 +8,19 @@ export default class Wallet extends React.Component {
   }
 
   componentDidMount() {
-    WalletModel.fetch(2).then((wallet) => {
+    WalletModel.fetch(1).then((wallet) => {
       this.setState({ model: wallet });
     });
   }
 
   renderLowBalanceMessage() {
-    return <h5 style={{ color: "red" }}>Low Balance</h5>;
+    return <div id="lowBalanceMessage" style={{ color: "red", fontSize : 20 }}>Low Balance</div>;
   }
 
   render() {
     return <div>
-      <h1 id='balance'> Balance</h1>
-      <h2 id='balanceAmount'>₹ {this.state.model.balance} </h2>
+      <div id='balance' style={{ fontSize : 100}}> Balance</div>
+      <div id='balanceAmount' style={{ fontSize : 60}}>₹ {this.state.model.balance} </div>
       {this.state.model.isBalanceLow() ? this.renderLowBalanceMessage() : ""}
     </div>;
   }
