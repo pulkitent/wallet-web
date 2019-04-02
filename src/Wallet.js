@@ -4,7 +4,7 @@ import WalletModel from "./WalletModel";
 export default class Wallet extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { model: new WalletModel({balance:0})};
+    this.state = { model: new WalletModel({ balance: 0 }) };
   }
 
   componentDidMount() {
@@ -13,20 +13,19 @@ export default class Wallet extends React.Component {
     });
   }
 
+  isBalanceLow() {
+    return this.state.model.balance <= 10;
+  }
+
+  renderLowBalanceMessage() {
+    return <h5 style={{ color: "red" }}>Low Balance</h5>;
+  }
+
   render() {
-    this.isBalanceLow();
     return <div>
       <h1 id='balance'> Balance</h1>
       <h2 id='balanceAmount'>₹ {this.state.model.balance} </h2>
-      {this.isBalanceLow()}
+      {this.isBalanceLow() ? this.renderLowBalanceMessage() : ""}
     </div>;
-  }
-
-  isBalanceLow() {
-    let lowBalanceAlert;
-    if(this.state.model.balance<=10){
-      lowBalanceAlert = <h5 style={{color : 'red'}}>Low Balance</h5>
-    }
-    return lowBalanceAlert;
   }
 }
