@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import Wallet from "./Wallet";
-import FilterableTransactionsTable from "./FilterableTransactionsTable";
+import CreateTransaction from "./CreateTransaction";
 
 class App extends Component {
   render() {
     return (
       <div className={'App'}>
         <Wallet/>
-        <FilterableTransactionsTable/>
+        <CreateTransaction/>
       </div>
     );
   }
