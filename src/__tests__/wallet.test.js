@@ -16,7 +16,14 @@ describe("Wallet", () => {
     const wallet = shallow(<Wallet/>);
     const balance = wallet.find("#balance");
 
-    expect(balance.text()).toContain(0);
+    expect(balance).toHaveLength(1);
+  });
+
+  it("should have balance amount tag", () => {
+    const wallet = shallow(<Wallet/>);
+    const balance = wallet.find("#balanceAmount");
+
+    expect(balance).toHaveLength(1);
   });
 
   it("should have balance 2000", async () => {
@@ -24,7 +31,7 @@ describe("Wallet", () => {
 
     const wallet = shallow(<Wallet/>);
     await Promise.resolve();
-    const balance = wallet.find("#balance");
+    const balance = wallet.find("#balanceAmount");
 
     expect(balance.text()).toContain(2000);
   });

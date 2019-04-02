@@ -15,7 +15,8 @@ export default class Wallet extends React.Component {
 
   render() {
     return <div>
-      <h1 id='balance'> Your balance is Rs {this.state.model.balance} </h1>
+      <h1 id='balance'> Balance</h1>
+      <h2 id='balanceAmount'>₹ {this.state.model.balance} </h2>
     </div>;
   }
 }
