@@ -22,17 +22,17 @@ class TransactionForm extends Component {
     this.setState({ "transaction": transaction });
   }
 
-   handleFormSubmit(event) {
+  handleFormSubmit(event) {
     const transaction = this.state.transaction;
     console.log(transaction);
-    const response =  transaction.save();
+    const response = transaction.save();
     console.log(response);
   }
 
   render() {
     return (
       <div>
-        <form >
+        <form>
           <label htmlFor="amount">Amount</label>
           <input type="number" id="amount" name="amount" onChange={this.handleAmountChange}
                  value={this.state.transaction.amount}/>

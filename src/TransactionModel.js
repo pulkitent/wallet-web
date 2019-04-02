@@ -25,7 +25,12 @@ export default class TransactionModel {
 
   save() {
     console.log("Inside Post");
-    axios.post('http://localhost:8084/api/wallets/1/transactions', {"id":0,"amount":100,"type":"CREDIT"})
+    /*axios({
+      method: "post",
+      url: "/wallets/1/transactions",
+      data: { "id": 0, "amount": 100, "type": "CREDIT" }
+    });*/
+    axios.post("www.google.com")
       .then(res => console.log(res));
   }
 }
