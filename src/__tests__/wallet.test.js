@@ -43,4 +43,14 @@ describe("Wallet", () => {
 
     expect(lowBalance).toHaveLength(1);
   });
+
+  it("should have a low message alert with wallet balance 10 INR", async () => {
+    WalletModel.fetch.mockResolvedValue(new WalletModel({'balance': 10 }));
+
+    const wallet = shallow(<Wallet/>);
+    await Promise.resolve();
+    const balance = wallet.find("h5");
+
+    expect(balance.text()).toContain("Low Balance");
+  });
 });
