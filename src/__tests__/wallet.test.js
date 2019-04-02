@@ -12,21 +12,16 @@ describe("Wallet", () => {
     shallow(<Wallet/>);
   });
 
-  it("should have balance tag", () => {
+  it("should render balance header along with amount ", () => {
     const wallet = shallow(<Wallet/>);
-    const balance = wallet.find("#balance");
+    const balanceHeader = wallet.find("#balance");
+    const balanceAmount = wallet.find("#balanceAmount");
 
-    expect(balance).toHaveLength(1);
+    expect(balanceHeader).toHaveLength(1);
+    expect(balanceAmount).toHaveLength(1);
   });
 
-  it("should have balance amount tag", () => {
-    const wallet = shallow(<Wallet/>);
-    const balance = wallet.find("#balanceAmount");
-
-    expect(balance).toHaveLength(1);
-  });
-
-  it("should have balance 2000", async () => {
+  it("should display balance 2000", async () => {
     WalletModel.fetch.mockResolvedValue(new WalletModel({'balance': 2000 }));
 
     const wallet = shallow(<Wallet/>);
