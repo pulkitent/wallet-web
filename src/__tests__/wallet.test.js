@@ -36,7 +36,7 @@ describe("Wallet", () => {
 
     const wallet = shallow(<Wallet/>);
     await Promise.resolve();
-    const balance = wallet.find("h5");
+    const balance = wallet.find("#lowBalanceMessage");
 
     expect(balance.text()).toContain("Low Balance");
   });
