@@ -11,6 +11,7 @@ export default class WalletModel {
 
   static async fetch(id) {
     const wallet = await axios.get("/wallets/" + id);
+    console.log(wallet);
     return new WalletModel(wallet.data);
   }
 }
