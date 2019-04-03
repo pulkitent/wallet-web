@@ -8,20 +8,17 @@ class TransactionForm extends Component {
         this.state = {
             transaction: new TransactionModel()
         };
-        this.handleAmountChange = this.handleAmountChange.bind(this);
-        this.handleRemarkChange = this.handleRemarkChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    handleAmountChange(event) {
+    handleAmountChange = (event) => {
         this.setState({transaction: new TransactionModel(this.props.type, event.target.value, this.state.transaction.remark)});
     }
 
-    handleRemarkChange(event) {
+    handleRemarkChange = (event) => {
         this.setState({transaction: new TransactionModel(this.props.type, this.state.transaction.amount, event.target.value)});
     }
 
-    handleFormSubmit(event) {
+    handleFormSubmit = (event) => {
         event.preventDefault();
         this.state.transaction.save().then(() => {
             this.props.onTransaction();

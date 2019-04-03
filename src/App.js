@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import Wallet from "./Wallet";
-import CreateTransaction from "./CreateTransaction";
+import ToggleableTransaction from "./ToggleableTransaction";
 
 class App extends Component {
   render() {
     return (
       <div className={'App'}>
         <Wallet/>
-        <CreateTransaction onTransaction={() => {}}/>
+        <ToggleableTransaction onSuccess={() => {}}/>
       </div>
     );
   }

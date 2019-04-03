@@ -1,23 +1,23 @@
 import { shallow } from "enzyme/build";
 import TransactionForm from "../TransactionForm";
-import CreateTransaction from "../CreateTransaction";
+import ToggleableTransaction from "../ToggleableTransaction";
 import React from "react";
 
-describe("CreateTransaction", () => {
+describe("ToggleableTransaction", () => {
   describe("#render", () => {
     it("should render without crashing", () => {
-      shallow(<CreateTransaction/>);
+      shallow(<ToggleableTransaction/>);
     });
 
     it("should render credit button", () => {
-      const createTransaction = shallow(<CreateTransaction/>);
+      const createTransaction = shallow(<ToggleableTransaction/>);
       const credit = createTransaction.find("#credit");
 
       expect(credit).toHaveLength(1);
     });
 
     it("should render a transaction form on click of credit", () => {
-      const createTransaction = shallow(<CreateTransaction/>);
+      const createTransaction = shallow(<ToggleableTransaction/>);
       createTransaction.find("#credit").simulate("click");
       const transactionForm = createTransaction.find(TransactionForm);
 
