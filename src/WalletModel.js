@@ -14,7 +14,7 @@ export default class WalletModel {
   }
 
   static async fetch(id) {
-    const wallet = await axios.get(process.env.REACT_APP_WALLET_API_URL + "/wallets/" + id);
+    const wallet = await axios.get(`${process.env.REACT_APP_WALLET_API_URL}/wallets/${id}`);
     return new WalletModel(wallet.data);
   }
 }
