@@ -19,7 +19,7 @@ export default class Wallet extends React.Component {
 
   render() {
     return <div>
-      <div id='balance' style={{fontSize : 100}}> Balance</div>
+      <div id='balance' style={{fontSize : 70}}> Balance</div>
       <div id='balanceAmount' style={{fontSize : 60}}>₹ {this.state.model.balance} </div>
       {this.state.model.isBalanceLow() ? this.renderLowBalanceMessage() : ""}
     </div>;
