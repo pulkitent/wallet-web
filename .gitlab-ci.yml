@@ -5,7 +5,7 @@ cache:
     - node_modules
 
 variables:
-  REACT_APP_WALLET_API_URL: "https://pathashala-mock-api.herokuapp.com"
+  REACT_APP_WALLET_API_URL: "https://codeplay-wallet-service.herokuapp.com/api"
 
 stages:
   - test
