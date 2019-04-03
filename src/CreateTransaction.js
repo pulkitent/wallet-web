@@ -1,26 +1,33 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import TransactionForm from "./TransactionForm";
 
 class CreateTransaction extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {"showTransactionForm": false, "type": ""};
+    }
 
+    render() {
+        return (
+            <div>
+                <button id="credit" onClick={this.handleCreditClick}>Credit</button>
+                {
+                    this.state.showTransactionForm ?
+                        <TransactionForm type={this.state.type} onTransaction={this.handleTransaction}/>
+                        : null
+                }
+            </div>
+        );
+    }
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {formStatus : ""};
-  }
+    handleCreditClick = () => {
+        this.setState({"showTransactionForm": !this.state.showTransactionForm});
+        this.setState({"type": "CREDIT"});
+    }
 
-  render() {
-    return (
-      <div>
-        <button id="credit" onClick={this.handleClick}>Credit</button>
-        <div>{this.state.formStatus}</div>
-      </div>
-    );
-  }
-
-  handleClick = () => {
-    this.setState({formStatus : <TransactionForm/>});
-  }
+    handleTransaction = () => {
+        this.props.onTransaction();
+    }
 }
 
 export default CreateTransaction;

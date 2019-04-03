@@ -16,8 +16,9 @@ describe("CreateTransaction", () => {
       expect(credit).toHaveLength(1);
     });
 
-    it("should render a transaction form", () => {
+    it("should render a transaction form on click of credit", () => {
       const createTransaction = shallow(<CreateTransaction/>);
+      createTransaction.find("#credit").simulate("click");
       const transactionForm = createTransaction.find(TransactionForm);
 
       expect(transactionForm).toHaveLength(1);
