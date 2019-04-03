@@ -19,4 +19,10 @@ describe("WalletModel", () => {
 
     expect(wallet.balance).toEqual(2000);
   });
+
+  it("If balance is less than 10 should return true", async () => {
+    const walletModel = new WalletModel({ balance: 9 });
+
+    expect(walletModel.isBalanceLow()).toBeTruthy();
+  });
 });
