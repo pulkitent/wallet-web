@@ -20,7 +20,7 @@ describe("Wallet", () => {
   });
 
   it("should have balance 2000", async () => {
-    WalletModel.fetch.mockResolvedValue(new WalletModel({'balance': 2000 }));
+    WalletModel.fetch.mockResolvedValue(new WalletModel({ "balance": 2000 }));
 
     const wallet = shallow(<Wallet/>);
     await Promise.resolve();

@@ -1,6 +1,6 @@
 import { shallow } from "enzyme/build";
 import TransactionForm from "../TransactionForm";
-import ToggleableTransaction from "../ToggleableTransaction";
+import { ToggleableTransaction } from "../ToggleableTransaction";
 import React from "react";
 
 describe("ToggleableTransaction", () => {
@@ -17,7 +17,7 @@ describe("ToggleableTransaction", () => {
     });
 
     it("should render a transaction form on click of credit", () => {
-      const createTransaction = shallow(<ToggleableTransaction/>);
+      const createTransaction = shallow(<ToggleableTransaction onSuccess={jest.fn()}/>);
       createTransaction.find("#credit").simulate("click");
       const transactionForm = createTransaction.find(TransactionForm);
 

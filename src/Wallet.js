@@ -4,7 +4,7 @@ import WalletModel from "./WalletModel";
 export default class Wallet extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { model: new WalletModel({balance:0})};
+    this.state = { model: new WalletModel({ balance: 0 }) };
   }
 
   componentDidMount() {
