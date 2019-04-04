@@ -17,7 +17,7 @@ export class ToggleableTransaction extends Component {
         <button id="credit" onClick={this.toggleCreditForm}>Credit</button>
         {((() => {
           if (this.state.showTransactionForm) {
-            return <TransactionForm type={this.state.type} onSuccess={this.props.onSuccess()}/>;
+            return <TransactionForm type={this.state.type} onSuccess={this.props.onSuccess}/>;
           }
         })())
         }
