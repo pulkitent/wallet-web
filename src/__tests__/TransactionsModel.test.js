@@ -29,10 +29,9 @@ const transactionsList = {
 describe("TransactionsModel", () => {
   it("should able to call transaction api", async () => {
     axios.get.mockResolvedValue(transactionsList);
-    process.env.REACT_APP_WALLET_API_URL = "basepath";
     await TransactionsModel.fetch();
 
-    const url = "basepath" + "/wallets/1/transactions";
+    const url = 'basePath' + "/wallets/1/transactions";
     expect(axios.get).toHaveBeenCalledWith(url);
   });
 
