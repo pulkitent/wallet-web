@@ -3,7 +3,7 @@ import React from "react";
 export default class TransactionRow extends React.Component {
 
   render() {
-    const {month, amount, transactionType, remarks} = this.props.transaction;
+    const { month, amount, transactionType, remarks } = this.props.transaction;
     return (
       <tr>
         <td>{month}</td>

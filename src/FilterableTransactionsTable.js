@@ -16,7 +16,7 @@ export default class FilterableTransactionsTable extends React.Component {
   }
 
   handleSearch = (searchText) => {
-    this.setState({searchText : searchText});
+    this.setState({ searchText: searchText });
   };
 
 
