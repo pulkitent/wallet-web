@@ -29,5 +29,22 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.8.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}",
+      "!src/serviceWorker.js",
+      "!src/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "text"
+    ]
   }
 }
