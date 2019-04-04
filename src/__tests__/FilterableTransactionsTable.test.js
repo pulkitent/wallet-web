@@ -1,9 +1,9 @@
 import React from "react";
-import { shallow } from "enzyme";
+import {shallow} from "enzyme";
 import FilterableTransactionsTable from "../FilterableTransactionsTable";
 import TransactionsModel from "../TransactionsModel";
-import TransactionRow from "../TransactionRow";
 import SearchBar from "../SearchBar";
+import {TransactionsTable} from "../TransactionsTable";
 
 const transactionsList = [
   {
@@ -28,50 +28,9 @@ const transactionsList = [
 
 const modelWithTwoTransactions = new TransactionsModel(transactionsList);
 
-beforeAll(() => {
-  TransactionsModel.fetch = jest.fn(() => Promise.resolve(new TransactionsModel([])));
-});
-
 describe("FilterableTransactionsTable", () => {
   it("should render without crashing", () => {
     shallow(<FilterableTransactionsTable/>);
-  });
-
-  describe("Construction of view", () => {
-    it("should have 1 row and 4 rows in table headers", () => {
-      const transactions = shallow(<FilterableTransactionsTable/>);
-      const headers = transactions.find("thead");
-
-      expect(headers.find("tr")).toHaveLength(1);
-      expect(headers.find("tr th")).toHaveLength(4);
-    });
-
-    it("should have one table body", () => {
-      const transactions = shallow(<FilterableTransactionsTable/>);
-      const tableBody = transactions.find("tbody");
-
-      expect(tableBody).toHaveLength(1);
-    });
-  });
-
-  describe("Listing of transactions", () => {
-    it("should able to sent props to TransactionRow", async () => {
-      TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
-      const transactions = shallow(<FilterableTransactionsTable/>);
-      await Promise.resolve();
-      const data = transactions.find(TransactionRow).at(0);
-
-      expect(data.props().transaction).toMatchObject(transactionsList[0]);
-    });
-
-    it("should able to sent props to TransactionRow", async () => {
-      TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
-      const transactions = shallow(<FilterableTransactionsTable/>);
-      await Promise.resolve();
-      const data = transactions.find(TransactionRow).at(1);
-
-      expect(data.props().transaction).toMatchObject(transactionsList[1]);
-    });
   });
 
   describe("SearchBar by remarks", () => {
@@ -82,28 +41,23 @@ describe("FilterableTransactionsTable", () => {
     });
 
     it("should able to filter transactions on search text", async () => {
-      TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
       const transactions = shallow(<FilterableTransactionsTable/>);
-      await Promise.resolve();
       const search = transactions.find(SearchBar);
 
       search.simulate("search", "Snacks");
 
-      const transactionRows = transactions.find(TransactionRow);
-      expect(transactionRows).toHaveLength(1);
+      expect(transactions.find(TransactionsTable).props().searchText).toEqual('Snacks');
     });
+  });
 
-    it("should able to filter transactions on search text", async () => {
-      TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
-      const transactions = shallow(<FilterableTransactionsTable/>);
-      await Promise.resolve();
-      const search = transactions.find(SearchBar);
+  it('should show transactions', async () => {
+    TransactionsModel.fetch = jest.fn();
+    TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
+    const filterableTable = shallow(<FilterableTransactionsTable/>);
 
-      search.simulate("search", "ops");
+    await Promise.resolve();
 
-      const transactionRows = transactions.find(TransactionRow);
-      expect(transactionRows).toHaveLength(0);
-    });
-
+    expect(filterableTable.find(TransactionsTable)).toHaveLength(1);
+    expect(filterableTable.find(TransactionsTable).props().transactions).toBe(transactionsList);
   });
 });
