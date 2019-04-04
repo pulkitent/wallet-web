@@ -1,5 +1,5 @@
 import { shallow } from "enzyme/build";
-import TransactionForm from "../TransactionForm";
+import { TransactionForm } from "../TransactionForm";
 import { ToggleableTransaction } from "../ToggleableTransaction";
 import React from "react";
 

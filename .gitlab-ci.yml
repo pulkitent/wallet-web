@@ -1,17 +1,24 @@
-# Using the node alpine image to build the React app
 image: node:alpine
 
-# Cache node modules - speeds up future builds
 cache:
   paths:
     - node_modules
 
-# Name the stages involved in the pipeline
+variables:
+  REACT_APP_WALLET_API_URL: "https://codeplay-wallet-service.herokuapp.com/api"
+
 stages:
+  - test
   - deploy
 
-# Job name for gitlab to recognise this results in assets for Gitlab Pages
-# https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
+test:
+  stage: test
+  variables:
+    REACT_APP_WALLET_API_URL: "basePath"
+  script:
+    - yarn install
+    - yarn test
+
 pages:
   stage: deploy
   script:

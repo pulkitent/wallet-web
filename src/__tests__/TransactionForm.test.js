@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TransactionForm from "../TransactionForm";
+import { TransactionForm } from "../TransactionForm";
 
 describe("TransactionForm", () => {
   describe("#render", () => {

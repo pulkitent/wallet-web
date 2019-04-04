@@ -1,5 +1,5 @@
 import axios from "axios";
-import TransactionModel from "../TransactionModel";
+import { TransactionModel } from "../TransactionModel";
 
 jest.mock("axios");
 

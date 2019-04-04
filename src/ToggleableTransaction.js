@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TransactionForm from "./TransactionForm";
+import { TransactionForm } from "./TransactionForm";
 
 export class ToggleableTransaction extends Component {
   constructor(props, context) {
@@ -9,7 +9,6 @@ export class ToggleableTransaction extends Component {
 
   toggleCreditForm = () => {
     this.setState({ showTransactionForm: !this.state.showTransactionForm, type: "CREDIT" });
-    this.setState();
   };
 
   render() {

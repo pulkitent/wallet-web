@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export default class TransactionModel {
-  constructor(type, amount, remark) {
+export class TransactionModel {
+  constructor(walletId, type, amount, remark) {
     this._type = type;
     this._amount = amount;
     this._remark = remark;
+    this._walletId = walletId;
   }
 
   set amount(value) {
@@ -25,7 +26,7 @@ export default class TransactionModel {
 
   save() {
     //TODO : Take wallet id from state
-    return axios.post("/wallets/1/transactions",
+    return axios.post(`${process.env.REACT_APP_WALLET_API_URL}/wallets/${this._walletId}/transactions`,
       { "type": this._type, "amount": this._amount, "remark": this._remark });
   }
 }

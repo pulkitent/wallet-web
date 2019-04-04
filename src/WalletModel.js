@@ -9,8 +9,12 @@ export default class WalletModel {
     return this._balance;
   }
 
+  isBalanceLow() {
+    return this._balance <= 10;
+  }
+
   static async fetch(id) {
-    const wallet = await axios.get("/wallets/" + id);
+    const wallet = await axios.get(`${process.env.REACT_APP_WALLET_API_URL}/wallets/${id}`);
     return new WalletModel(wallet.data);
   }
 }

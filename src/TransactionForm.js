@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TransactionModel from "./TransactionModel";
+import { TransactionModel } from "./TransactionModel";
 
-class TransactionForm extends Component {
+export class TransactionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,11 +10,13 @@ class TransactionForm extends Component {
   }
 
   handleAmountChange = (event) => {
-    this.setState({ transaction: new TransactionModel(this.props.type, event.target.value, this.state.transaction.remark) });
+    // TODO: get wallet id from query params
+    this.setState({ transaction: new TransactionModel(1, this.props.type, event.target.value, this.state.transaction.remark) });
   };
 
   handleRemarkChange = (event) => {
-    this.setState({ transaction: new TransactionModel(this.props.type, this.state.transaction.amount, event.target.value) });
+    // TODO: get wallet id from query params
+    this.setState({ transaction: new TransactionModel(1, this.props.type, this.state.transaction.amount, event.target.value) });
   };
 
   handleFormSubmit = (event) => {
@@ -44,7 +46,5 @@ class TransactionForm extends Component {
   }
 
 }
-
-export default TransactionForm;
 
 // TODO: remove form
