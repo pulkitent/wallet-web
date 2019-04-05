@@ -17,7 +17,7 @@ test:
     REACT_APP_WALLET_API_URL: "basePath"
   script:
     - yarn install
-    - yarn test
+    - yarn test --coverage
 
 pages:
   stage: deploy
