@@ -4,11 +4,11 @@ import SearchBar from "../SearchBar";
 
 describe("SearchBar", () => {
   it("should render without fail", () => {
-    shallow(<SearchBar/>);
+    shallow(<SearchBar />);
   });
 
   it("should render search bar", () => {
-    const search = shallow(<SearchBar/>);
+    const search = shallow(<SearchBar />);
     const searchBar = search.find("#search");
 
     expect(searchBar.type()).toBe("input");
@@ -16,7 +16,7 @@ describe("SearchBar", () => {
 
   it("should render search bar", () => {
     let handleSearch = jest.fn();
-    const search = shallow(<SearchBar onSearch={handleSearch}/>);
+    const search = shallow(<SearchBar onSearch={handleSearch} />);
     const searchBar = search.find("#search");
 
     searchBar.simulate("change", { target: { value: "Sn" } });

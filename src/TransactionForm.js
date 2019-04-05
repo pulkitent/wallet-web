@@ -9,17 +9,31 @@ export class TransactionForm extends Component {
     };
   }
 
-  handleAmountChange = (event) => {
+  handleAmountChange = event => {
     // TODO: get wallet id from query params
-    this.setState({ transaction: new TransactionModel(1, this.props.type, event.target.value, this.state.transaction.remark) });
+    this.setState({
+      transaction: new TransactionModel(
+        1,
+        this.props.type,
+        event.target.value,
+        this.state.transaction.remark
+      )
+    });
   };
 
-  handleRemarkChange = (event) => {
+  handleRemarkChange = event => {
     // TODO: get wallet id from query params
-    this.setState({ transaction: new TransactionModel(1, this.props.type, this.state.transaction.amount, event.target.value) });
+    this.setState({
+      transaction: new TransactionModel(
+        1,
+        this.props.type,
+        this.state.transaction.amount,
+        event.target.value
+      )
+    });
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = event => {
     event.preventDefault();
     this.state.transaction.save().then(() => {
       this.props.onSuccess();
@@ -32,19 +46,28 @@ export class TransactionForm extends Component {
         <h1>{this.props.type}</h1>
         <form onSubmit={this.handleFormSubmit}>
           <label htmlFor="amount">Amount</label>
-          <input type="number" id="amount" name="amount" onChange={this.handleAmountChange}
-                 value={this.state.transaction.amount}/>
-          <br/>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            onChange={this.handleAmountChange}
+            value={this.state.transaction.amount}
+          />
+          <br />
           <label htmlFor="remark">Remark</label>
-          <input type="text" id="remark" name="remark" onChange={this.handleRemarkChange}
-                 value={this.state.transaction.remark}/>
-          <br/>
-          <input type="submit" id="proceed" value="Proceed"/>
+          <input
+            type="text"
+            id="remark"
+            name="remark"
+            onChange={this.handleRemarkChange}
+            value={this.state.transaction.remark}
+          />
+          <br />
+          <input type="submit" id="proceed" value="Proceed" />
         </form>
       </div>
     );
   }
-
 }
 
 // TODO: remove form
