@@ -14,8 +14,8 @@ stages:
 test:
   stage: test
   script:
-    - yarn install --tests
-    - yarn test
+    - yarn install
+    - yarn test --coverage
 
 pages:
   stage: deploy
