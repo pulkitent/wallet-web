@@ -13,8 +13,8 @@ const transaction = {
 
 describe("TransactionModel", () => {
     describe("#save", () => {
-        it('should hit the transaction endpoint on save', () => {
-            const model = getTransaction();
+        it('should call the endpoint on save', () => {
+            const model = transactionModel();
             const endpointUrl = "basePath/wallets/" + model.walletId + "/transactions";
             const data = {type: model.type, remark: model.remark, amount: model.amount};
 
@@ -25,7 +25,7 @@ describe("TransactionModel", () => {
 
         it("should add new transaction given id, type, amount, remark", async () => {
             axios.post.mockResolvedValue(new Promise((resolve) => resolve(transaction)));
-            const transactionModel = getTransaction();
+            const transactionModel = transactionModel();
             let savedTransaction = {};
 
             await transactionModel.save()
@@ -38,7 +38,7 @@ describe("TransactionModel", () => {
 
     describe('#amount', () => {
         it('should update the amount of transaction', () => {
-            const model = getTransaction();
+            const model = transactionModel();
 
             model.amount = 110;
 
@@ -47,6 +47,6 @@ describe("TransactionModel", () => {
     });
 });
 
-const getTransaction = function () {
+const transactionModel = function () {
     return new TransactionModel(1, "CREDIT", 10, "Snacks");
 };
