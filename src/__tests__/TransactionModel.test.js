@@ -25,10 +25,10 @@ describe("TransactionModel", () => {
 
         it("should add new transaction given id, type, amount, remark", async () => {
             axios.post.mockResolvedValue(new Promise((resolve) => resolve(transaction)));
-            const transactionModel = transactionModel();
+            const model = transactionModel();
             let savedTransaction = {};
 
-            await transactionModel.save()
+            await model.save()
                 .then(response => savedTransaction = response);
 
             await Promise.resolve();
