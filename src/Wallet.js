@@ -15,7 +15,7 @@ export default class Wallet extends React.Component {
 
   renderLowBalanceMessage() {
     return (
-      <div id="lowBalanceMessage" style={{ color: "red", fontSize: 30 }}>
+      <div id="lowBalanceMessage" style={{ color: "red", fontSize: 20 }}>
         Low Balance
       </div>
     );
@@ -25,7 +25,6 @@ export default class Wallet extends React.Component {
     return (
       <div>
         <div id="balance" style={{ fontSize: 70 }}>
-          {" "}
           Balance
         </div>
         <div id="balanceAmount" style={{ fontSize: 60 }}>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TransactionModel } from "./TransactionModel";
-import "./ButtonStyle.css";
+import Button from 'react-bootstrap/Button';
 
 export class TransactionForm extends Component {
   constructor(props) {
@@ -70,7 +70,7 @@ export class TransactionForm extends Component {
           />
           <br />
           <br />
-          <input class="button" type="submit" id="proceed" value="Proceed" />
+          <Button type="submit" variant="light">Proceed</Button>
         </form>
       </div>
     );
