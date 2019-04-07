@@ -10,7 +10,9 @@ export default class TransactionsModel {
   }
 
   static async fetch() {
-    const transactions = await axios.get(`${process.env.REACT_APP_WALLET_API_URL}/wallets/1/transactions`);
+    const transactions = await axios.get(
+      `${process.env.REACT_APP_WALLET_API_URL}/wallets/1/transactions`
+    );
     return new TransactionsModel(transactions.data);
   }
 }

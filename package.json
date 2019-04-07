@@ -1,9 +1,8 @@
 {
   "name": "wallet-web",
   "version": "0.1.0",
-  "proxy" : "http://localhost:8084/api",
   "private": true,
-  "homepage" : ".",
+  "homepage": ".",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.8.5",
@@ -14,7 +13,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "prettier --check src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"

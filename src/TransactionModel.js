@@ -20,13 +20,22 @@ export class TransactionModel {
     return this._remark;
   }
 
-  set remark(value) {
-    this._remark = value;
+  get walletId() {
+    return this._walletId;
   }
 
-  save() {
-    //TODO : Take wallet id from state
-    return axios.post(`${process.env.REACT_APP_WALLET_API_URL}/wallets/${this._walletId}/transactions`,
-      { "type": this._type, "amount": this._amount, "remark": this._remark });
+  get type() {
+    return this._type;
+  }
+
+  async save() {
+    return axios
+      .post(
+        `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
+          this._walletId
+        }/transactions`,
+        { type: this._type, amount: this._amount, remark: this._remark }
+      )
+      .then(response => response);
   }
 }
