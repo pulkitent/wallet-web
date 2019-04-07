@@ -45,26 +45,31 @@ export class TransactionForm extends Component {
     return (
       <div>
         <h1>{this.props.type}</h1>
-          <label htmlFor="amount">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            onChange={this.handleAmountChange}
-            value={this.state.transaction.amount}
-          />
-          <br />
-          <label htmlFor="remark">Remark</label>
-          <input
-            type="text"
-            id="remark"
-            name="remark"
-            onChange={this.handleRemarkChange}
-            value={this.state.transaction.remark}
-          />
-          <br />
-          <input type="submit" id="proceed" value="Proceed" onClick={this.handleFormSubmit}/>
-          <div id="message">{this.state.message}</div>
+        <label htmlFor="amount">Amount</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          onChange={this.handleAmountChange}
+          value={this.state.transaction.amount}
+        />
+        <br />
+        <label htmlFor="remark">Remark</label>
+        <input
+          type="text"
+          id="remark"
+          name="remark"
+          onChange={this.handleRemarkChange}
+          value={this.state.transaction.remark}
+        />
+        <br />
+        <input
+          type="submit"
+          id="proceed"
+          value="Proceed"
+          onClick={this.handleFormSubmit}
+        />
+        <div id="message">{this.state.message}</div>
       </div>
     );
   }

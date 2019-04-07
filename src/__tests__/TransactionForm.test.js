@@ -96,9 +96,7 @@ describe("TransactionForm", () => {
       );
       transactionForm.state().transaction.save = saveFn;
 
-      transactionForm
-        .find("#proceed")
-        .simulate("click", event);
+      transactionForm.find("#proceed").simulate("click", event);
 
       await Promise.resolve();
       expect(transactionForm.find("#message").text()).toBe("");
