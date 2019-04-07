@@ -35,7 +35,6 @@ export class TransactionForm extends Component {
   };
 
   handleFormSubmit = event => {
-    event.preventDefault();
     this.state.transaction.save().then(() => {
       this.setState({ message: "Transaction successful" });
       this.props.onSuccess();
@@ -46,7 +45,6 @@ export class TransactionForm extends Component {
     return (
       <div>
         <h1>{this.props.type}</h1>
-        <form onSubmit={this.handleFormSubmit}>
           <label htmlFor="amount">Amount</label>
           <input
             type="number"
@@ -65,9 +63,8 @@ export class TransactionForm extends Component {
             value={this.state.transaction.remark}
           />
           <br />
-          <input type="submit" id="proceed" value="Proceed" />
+          <input type="submit" id="proceed" value="Proceed" onClick={this.handleFormSubmit}/>
           <div id="message">{this.state.message}</div>
-        </form>
       </div>
     );
   }
