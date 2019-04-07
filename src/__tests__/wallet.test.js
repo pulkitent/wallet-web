@@ -9,11 +9,11 @@ beforeAll(() => {
 
 describe("Wallet", () => {
   it("should not crash on rendering", () => {
-    shallow(<Wallet/>);
+    shallow(<Wallet />);
   });
 
   it("should render balance header along with amount ", () => {
-    const wallet = shallow(<Wallet/>);
+    const wallet = shallow(<Wallet />);
     const balanceHeader = wallet.find("#balance");
     const balanceAmount = wallet.find("#balanceAmount");
 
@@ -22,9 +22,9 @@ describe("Wallet", () => {
   });
 
   it("should display balance 2000", async () => {
-    WalletModel.fetch.mockResolvedValue(new WalletModel({ "balance": 2000 }));
+    WalletModel.fetch.mockResolvedValue(new WalletModel({ balance: 2000 }));
 
-    const wallet = shallow(<Wallet/>);
+    const wallet = shallow(<Wallet />);
     await Promise.resolve();
     const balance = wallet.find("#balanceAmount");
 
@@ -32,9 +32,9 @@ describe("Wallet", () => {
   });
 
   it("should have a low message alert with wallet balance 10 INR", async () => {
-    WalletModel.fetch.mockResolvedValue(new WalletModel({ "balance": 10 }));
+    WalletModel.fetch.mockResolvedValue(new WalletModel({ balance: 10 }));
 
-    const wallet = shallow(<Wallet/>);
+    const wallet = shallow(<Wallet />);
     await Promise.resolve();
     const balance = wallet.find("#lowBalanceMessage");
 
