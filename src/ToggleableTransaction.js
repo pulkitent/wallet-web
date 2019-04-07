@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TransactionForm } from "./TransactionForm";
+import "./ButtonStyle.css";
 
 export class ToggleableTransaction extends Component {
   constructor(props, context) {
@@ -17,7 +18,7 @@ export class ToggleableTransaction extends Component {
   render() {
     return (
       <div>
-        <button id="credit" onClick={this.toggleCreditForm}>
+        <button class="button" id="credit" onClick={this.toggleCreditForm}>
           Credit
         </button>
         {(() => {

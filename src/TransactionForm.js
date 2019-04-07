@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TransactionModel } from "./TransactionModel";
+import "./ButtonStyle.css";
 
 export class TransactionForm extends Component {
   constructor(props) {
@@ -43,9 +44,11 @@ export class TransactionForm extends Component {
   render() {
     return (
       <div>
-        <h1>{this.props.type}</h1>
         <form onSubmit={this.handleFormSubmit}>
-          <label htmlFor="amount">Amount</label>
+          <br />
+          <label htmlFor="amount" style={{ margin: 7 }}>
+            Amount
+          </label>
           <input
             type="number"
             id="amount"
@@ -54,7 +57,10 @@ export class TransactionForm extends Component {
             value={this.state.transaction.amount}
           />
           <br />
-          <label htmlFor="remark">Remark</label>
+          <br />
+          <label htmlFor="remark" style={{ margin: 7 }}>
+            Remarks
+          </label>
           <input
             type="text"
             id="remark"
@@ -63,7 +69,8 @@ export class TransactionForm extends Component {
             value={this.state.transaction.remark}
           />
           <br />
-          <input type="submit" id="proceed" value="Proceed" />
+          <br />
+          <input class="button" type="submit" id="proceed" value="Proceed" />
         </form>
       </div>
     );
