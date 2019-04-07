@@ -16,13 +16,19 @@ describe("Dashboard", () => {
     expect(dashBoard.find(Wallet)).toHaveLength(1);
   });
 
-  it("should render toggleable transactions", () => {
+  it("should render toggleable transactionModel", () => {
     const dashBoard = shallow(<Dashboard/>);
 
     expect(dashBoard.find(ToggleableTransaction)).toHaveLength(1);
   });
 
   it("should render transaction table", () => {
+    const dashBoard = shallow(<Dashboard/>);
+
+    expect(dashBoard.find(TransactionsTable)).toHaveLength(1);
+  });
+
+  it("should render fetch transactionModel", () => {
     const dashBoard = shallow(<Dashboard/>);
 
     expect(dashBoard.find(TransactionsTable)).toHaveLength(1);

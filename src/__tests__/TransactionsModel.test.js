@@ -31,7 +31,7 @@ describe("TransactionsModel", () => {
     axios.get.mockResolvedValue(transactionsList);
     await TransactionsModel.fetch();
 
-    const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+    const transactionEndpoint = "basePath" + "/wallets/1/transactionModel";
     expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
   });
 
@@ -40,6 +40,6 @@ describe("TransactionsModel", () => {
 
     const model = await TransactionsModel.fetch();
 
-    expect(model.transactions).toHaveLength(2);
+    expect(model.transactionModel).toHaveLength(2);
   });
 });

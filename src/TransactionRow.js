@@ -1,14 +1,15 @@
 import React from "react";
+import moment from "moment";
 
 export default class TransactionRow extends React.Component {
   render() {
-    const { month, amount, transactionType, remarks } = this.props.transaction;
+    let { createdAt, amount, type, remark } = this.props.transaction;
     return (
       <tr>
-        <td>{month}</td>
+        <td>{moment(createdAt).format("DD-MM-YYYY")}</td>
         <td>{amount}</td>
-        <td>{transactionType}</td>
-        <td>{remarks}</td>
+        <td>{type}</td>
+        <td>{remark}</td>
       </tr>
     );
   }

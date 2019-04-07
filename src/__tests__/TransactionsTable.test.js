@@ -57,7 +57,7 @@ describe("TransactionsTable", () => {
     ).toEqual("Remarks");
   });
 
-  it("should send transactions as props to TransactionRow", async () => {
+  it("should send transactionModel as props to TransactionRow", async () => {
     const transactions = shallow(
       <TransactionsTable
         transactions={transactionsList}
@@ -71,8 +71,8 @@ describe("TransactionsTable", () => {
     );
   });
 
-  describe("Filtering of transactions", () => {
-    it("should list all transactions when there is no filter", async () => {
+  describe("Filtering of transactionModel", () => {
+    it("should list all transactionModel when there is no filter", async () => {
       const transactionsTable = shallow(
         <TransactionsTable
           transactions={transactionsList}

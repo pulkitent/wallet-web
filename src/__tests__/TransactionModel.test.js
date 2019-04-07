@@ -16,7 +16,7 @@ describe("TransactionModel", () => {
     it("should call the endpoint on save", () => {
       const model = transactionModel();
       const endpointUrl =
-        "basePath/wallets/" + model.walletId + "/transactions";
+        "basePath/wallets/" + model.walletId + "/transactionModel";
       const data = {
         type: model.type,
         remark: model.remark,
