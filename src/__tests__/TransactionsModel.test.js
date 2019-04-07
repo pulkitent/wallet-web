@@ -6,22 +6,22 @@ jest.mock("axios");
 const transactionsList = {
   data: [
     {
-      "id": 1,
-      "amount": 75,
-      "day": "3",
-      "month": "September",
-      "year": "2018",
-      "remarks": "Snacks",
-      "transactionType": "DEBIT"
+      id: 1,
+      amount: 75,
+      day: "3",
+      month: "September",
+      year: "2018",
+      remarks: "Snacks",
+      transactionType: "DEBIT"
     },
     {
-      "id": 2,
-      "amount": 3000,
-      "day": "7",
-      "month": "September",
-      "year": "2018",
-      "remarks": "Petrol",
-      "transactionType": "DEBIT"
+      id: 2,
+      amount: 3000,
+      day: "7",
+      month: "September",
+      year: "2018",
+      remarks: "Petrol",
+      transactionType: "DEBIT"
     }
   ]
 };
@@ -29,11 +29,10 @@ const transactionsList = {
 describe("TransactionsModel", () => {
   it("should able to call transaction api", async () => {
     axios.get.mockResolvedValue(transactionsList);
-    process.env.REACT_APP_WALLET_API_URL = "basepath";
     await TransactionsModel.fetch();
 
-    const url = "basepath" + "/wallets/1/transactions";
-    expect(axios.get).toHaveBeenCalledWith(url);
+    const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+    expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
   });
 
   it("should able get transaction list", async () => {
