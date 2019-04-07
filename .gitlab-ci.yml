@@ -8,9 +8,9 @@ variables:
   REACT_APP_WALLET_API_URL: "https://codeplay-wallet-service.herokuapp.com/api"
 
 stages:
+  - lint
   - test
   - deploy
-  - lint
 
 lint:
   stage: lint

@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier --check src/**/*.js !src/serviceWorker.js, !src/index.js"
+    "lint": "prettier --check src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
