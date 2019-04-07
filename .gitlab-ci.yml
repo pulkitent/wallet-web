@@ -10,6 +10,13 @@ variables:
 stages:
   - test
   - deploy
+  - lint
+
+lint:
+  stage: lint
+  script:
+    - yarn install
+    - yarn lint
 
 test:
   stage: test

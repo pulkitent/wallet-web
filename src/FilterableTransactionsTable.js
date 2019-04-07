@@ -1,7 +1,7 @@
 import React from "react";
 import TransactionsModel from "./TransactionsModel";
 import SearchBar from "./SearchBar";
-import {TransactionsTable} from "./TransactionsTable";
+import { TransactionsTable } from "./TransactionsTable";
 
 export default class FilterableTransactionsTable extends React.Component {
   constructor(props, context) {
@@ -10,21 +10,24 @@ export default class FilterableTransactionsTable extends React.Component {
   }
 
   componentDidMount() {
-    TransactionsModel.fetch().then((transactions) => {
+    TransactionsModel.fetch().then(transactions => {
       this.setState({ model: transactions });
     });
   }
 
-  handleSearch = (searchText) => {
+  handleSearch = searchText => {
     this.setState({ searchText: searchText });
   };
-
 
   render() {
     return (
       <div>
-        <SearchBar onSearch={this.handleSearch}/><br/>
-        <TransactionsTable searchText={this.state.searchText} transactions={this.state.model.transactions}/>
+        <SearchBar onSearch={this.handleSearch} />
+        <br />
+        <TransactionsTable
+          searchText={this.state.searchText}
+          transactions={this.state.model.transactions}
+        />
       </div>
     );
   }

@@ -6,22 +6,22 @@ jest.mock("axios");
 const transactionsList = {
   data: [
     {
-      "id": 1,
-      "amount": 75,
-      "day": "3",
-      "month": "September",
-      "year": "2018",
-      "remarks": "Snacks",
-      "transactionType": "DEBIT"
+      id: 1,
+      amount: 75,
+      day: "3",
+      month: "September",
+      year: "2018",
+      remarks: "Snacks",
+      transactionType: "DEBIT"
     },
     {
-      "id": 2,
-      "amount": 3000,
-      "day": "7",
-      "month": "September",
-      "year": "2018",
-      "remarks": "Petrol",
-      "transactionType": "DEBIT"
+      id: 2,
+      amount: 3000,
+      day: "7",
+      month: "September",
+      year: "2018",
+      remarks: "Petrol",
+      transactionType: "DEBIT"
     }
   ]
 };

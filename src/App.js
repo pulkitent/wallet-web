@@ -7,9 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className={"App"}>
-        <Wallet/>
-        <ToggleableTransaction onSuccess={() => {
-        }}/>
+        <Wallet />
+        <ToggleableTransaction onSuccess={() => {}} />
       </div>
     );
   }
