@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TransactionForm } from "./TransactionForm";
 import Button from 'react-bootstrap/Button';
+import './ToggelableTransaction.css'
 
 export class ToggleableTransaction extends Component {
   constructor(props, context) {
@@ -17,9 +18,9 @@ export class ToggleableTransaction extends Component {
 
   render() {
     return (
-      <div>
+      <div className={'toggleableTransaction'}>
         <Button variant="success" id="Credit" onClick={this.toggleCreditForm}
-        style={{marginTop:50}}>Credit</Button>
+        >Credit</Button>
         {(() => {
           if (this.state.showTransactionForm) {
             return (
