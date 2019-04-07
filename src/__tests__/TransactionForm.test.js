@@ -79,5 +79,31 @@ describe("TransactionForm", () => {
       await Promise.resolve();
       expect(handleTransaction).toHaveBeenCalled();
     });
+
+    it('should display success message on successful transaction', async () => {
+      const handleTransaction = jest.fn();
+      const event = {preventDefault: jest.fn()};
+      const saveFn = jest.fn().mockResolvedValue(Promise.resolve({}));
+      const transactionForm = shallow(<TransactionForm onSuccess={handleTransaction}/>);
+      transactionForm.state().transaction.save = saveFn;
+
+      transactionForm.find("form").first().simulate("submit", event);
+
+      await Promise.resolve();
+      expect(transactionForm.find("#message").text()).toBe("Transaction successful");
+    });
+
+    it('should not display success message on failed transaction', async () => {
+      const handleTransaction = jest.fn();
+      const event = {preventDefault: jest.fn()};
+      const saveFn = jest.fn().mockResolvedValue(Promise.reject({}));
+      const transactionForm = shallow(<TransactionForm onSuccess={handleTransaction}/>);
+      transactionForm.state().transaction.save = saveFn;
+
+      transactionForm.find("form").first().simulate("submit", event);
+
+      await Promise.resolve();
+      expect(transactionForm.find("#message").text()).toBe("");
+    });
   });
 });

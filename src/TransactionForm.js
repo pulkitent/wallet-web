@@ -5,7 +5,8 @@ export class TransactionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      transaction: new TransactionModel()
+      transaction: new TransactionModel(),
+      message: ""
     };
   }
 
@@ -22,6 +23,7 @@ export class TransactionForm extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     this.state.transaction.save().then(() => {
+      this.setState({message: "Transaction successful"});
       this.props.onSuccess();
     });
   };
@@ -40,6 +42,7 @@ export class TransactionForm extends Component {
                  value={this.state.transaction.remark}/>
           <br/>
           <input type="submit" id="proceed" value="Proceed"/>
+          <div id="message">{this.state.message}</div>
         </form>
       </div>
     );
