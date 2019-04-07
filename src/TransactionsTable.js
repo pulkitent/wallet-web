@@ -1,10 +1,11 @@
 import * as PropTypes from "prop-types";
 import React from "react";
 import TransactionRow from "./TransactionRow";
+import Table from "react-bootstrap/Table";
 
 export function TransactionsTable(props) {
   return (
-    <table align={"center"}>
+    <Table align={"center"}>
       <thead>
         <tr>
           <th>Date</th>
@@ -21,7 +22,7 @@ export function TransactionsTable(props) {
             );
           })}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

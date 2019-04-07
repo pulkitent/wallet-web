@@ -3,6 +3,7 @@ import { ToggleableTransaction } from "./ToggleableTransaction";
 import { TransactionsTable } from "./TransactionsTable";
 import Wallet from "./Wallet";
 import TransactionsModel from "./TransactionsModel";
+import Container from "react-bootstrap/Container";
 
 class Dashboard extends Component {
 
@@ -19,11 +20,11 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Wallet/>
         <ToggleableTransaction onSuccess={() => {}} />
         <TransactionsTable searchText="" transactions={this.state.transactionModel}/>
-      </div>
+      </Container>
     );
   }
 }
