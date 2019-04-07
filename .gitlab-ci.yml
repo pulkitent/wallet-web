@@ -11,13 +11,6 @@ stages:
   - lint
   - test
   - deploy
-  - lint
-
-lint:
-  stage: lint
-  script:
-    - yarn install
-    - yarn lint
 
 lint:
   stage: lint
