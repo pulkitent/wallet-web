@@ -16,16 +16,17 @@ export class ToggleableTransaction extends Component {
 
   render() {
     return (
-      <div>
-        <button id="credit" onClick={this.toggleCreditForm}>
+      <div className={"toggleable-transaction"}>
+        <Button variant="success" id="credit" onClick={this.toggleCreditForm}>
           Credit
-        </button>
+        </Button>
         {(() => {
           if (this.state.showTransactionForm) {
             return (
               <TransactionForm
                 type={this.state.type}
                 onSuccess={this.props.onSuccess}
+                style={{ padding: 100 }}
               />
             );
           }

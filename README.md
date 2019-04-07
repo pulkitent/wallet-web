@@ -66,3 +66,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Development Setup
+
+Add .env.local in project root.<br/>
+Add `REACT_APP_WALLET_API_URL="{Development api endpoint}"`.

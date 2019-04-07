@@ -28,7 +28,7 @@ describe("TransactionForm", () => {
       const transactionForm = shallow(<TransactionForm />);
       const proceed = transactionForm.find("#proceed");
 
-      expect(proceed.type()).toEqual("input");
+      expect(proceed.type().displayName).toEqual("Button");
       expect(proceed.props().type).toEqual("submit");
     });
   });

@@ -1,2 +1,4 @@
+#exclude these files when prettier is ran over all .js files within /src
 index.js
 serviceWorker.js
+setupTests.js
