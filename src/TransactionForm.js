@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TransactionModel } from "./TransactionModel";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 export class TransactionForm extends Component {
   constructor(props) {
@@ -70,7 +70,9 @@ export class TransactionForm extends Component {
           />
           <br />
           <br />
-          <Button type="submit" variant="secondary">Proceed</Button>
+          <Button type="submit" variant="secondary">
+            Proceed
+          </Button>
         </form>
       </div>
     );

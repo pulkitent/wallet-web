@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TransactionForm } from "./TransactionForm";
-import Button from 'react-bootstrap/Button';
-import './ToggelableTransaction.css'
+import Button from "react-bootstrap/Button";
+import "./ToggelableTransaction.css";
 
 export class ToggleableTransaction extends Component {
   constructor(props, context) {
@@ -18,16 +18,17 @@ export class ToggleableTransaction extends Component {
 
   render() {
     return (
-      <div className={'toggleableTransaction'}>
-        <Button variant="success" id="Credit" onClick={this.toggleCreditForm}
-        >Credit</Button>
+      <div className={"toggleable-transaction"}>
+        <Button variant="success" id="credit" onClick={this.toggleCreditForm}>
+          Credit
+        </Button>
         {(() => {
           if (this.state.showTransactionForm) {
             return (
               <TransactionForm
                 type={this.state.type}
                 onSuccess={this.props.onSuccess()}
-                style={{padding : 100}}
+                style={{ padding: 100 }}
               />
             );
           }
