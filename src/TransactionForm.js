@@ -70,7 +70,7 @@ export class TransactionForm extends Component {
           />
           <br />
           <br />
-          <Button type="submit" variant="secondary">
+          <Button id="proceed" type="submit" variant="secondary">
             Proceed
           </Button>
         </form>
