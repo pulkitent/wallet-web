@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { TransactionForm } from "./TransactionForm";
+import Button from "react-bootstrap/Button";
+import "./ToggelableTransaction.css";
 
 export class ToggleableTransaction extends Component {
   constructor(props, context) {
