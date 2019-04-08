@@ -56,14 +56,13 @@ describe("TransactionForm", () => {
   describe("#submit", () => {
     it("should display success message on successful transaction", async () => {
       const handleTransaction = jest.fn();
-      const event = { preventDefault: jest.fn() };
       const saveFn = jest.fn().mockResolvedValue(Promise.resolve({}));
       const transactionForm = shallow(
         <TransactionForm onSuccess={handleTransaction} />
       );
       transactionForm.state().transaction.save = saveFn;
 
-      transactionForm.find("#proceed").simulate("click", event);
+      transactionForm.find("#proceed").simulate("click");
 
       await Promise.resolve();
       expect(transactionForm.find("#message").text()).toBe(
@@ -73,14 +72,13 @@ describe("TransactionForm", () => {
 
     it("should not display success message on failed transaction", async () => {
       const handleTransaction = jest.fn();
-      const event = { preventDefault: jest.fn() };
       const saveFn = jest.fn().mockResolvedValue(Promise.reject({}));
       const transactionForm = shallow(
         <TransactionForm onSuccess={handleTransaction} />
       );
       transactionForm.state().transaction.save = saveFn;
 
-      transactionForm.find("#proceed").simulate("click", event);
+      transactionForm.find("#proceed").simulate("click");
 
       await Promise.resolve();
       expect(transactionForm.find("#message").text()).toBe("");
