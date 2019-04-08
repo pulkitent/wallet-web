@@ -1,12 +1,12 @@
 import axios from "axios";
 import { TransactionModel } from "../TransactionModel";
-import * as React from "react";
+import React from "react";
 
 jest.mock("axios");
 
 describe("TransactionModel", () => {
   describe("#save", () => {
-    it("should call the endpoint on save", () => {
+    it("should be able to call the endpoint on save", () => {
       const model = transactionModel();
       const endpointUrl =
         "basePath/wallets/" + model.walletId + "/transactions";
@@ -21,7 +21,7 @@ describe("TransactionModel", () => {
       expect(axios.post).toHaveBeenCalledWith(endpointUrl, data);
     });
 
-    it("should add new transaction given id, type, amount, remark", async () => {
+    it("should be able add new transaction given id, type, amount, remark", async () => {
       axios.post.mockResolvedValue(
         new Promise(resolve => resolve(transaction))
       );
@@ -46,7 +46,7 @@ describe("TransactionModel", () => {
   });
 
   describe("#fetch", () => {
-    it("should able to call transaction api", async () => {
+    it("should be able to call transaction api", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
       const transactionEndpoint = "basePath" + "/wallets/1/transactions";
@@ -57,7 +57,7 @@ describe("TransactionModel", () => {
       expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
     });
 
-    it("should able get transaction list", async () => {
+    it("should be able to get transactions", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
 
