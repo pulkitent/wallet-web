@@ -17,6 +17,7 @@ export function TransactionsTable(props) {
       <tbody>
         {props.transactions
           .filter(transaction => {
+            console.log(transaction.remark);
             return transaction.remark.indexOf(props.searchText) === 0;
           })
           .map(transaction => {

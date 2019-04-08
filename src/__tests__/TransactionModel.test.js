@@ -67,6 +67,38 @@ describe("TransactionModel", () => {
       expect(model).toHaveLength(2);
     });
   });
+
+  describe("#validation", () => {
+    it("should accept amount 110", () => {
+      const model = transactionModel();
+      model.amount = 110;
+
+      expect(model.isValidAmount()).toBeTruthy();
+    });
+
+    it("should not accept amount 12345", () => {
+      const model = transactionModel();
+
+      model.amount = 12345;
+      expect(model.isValidAmount()).toBeFalsy();
+    });
+
+    it("should accept remark 'Snacks", () => {
+      const model = transactionModel();
+      model.remark = "Snacks";
+
+      expect(model.isValidRemark()).toBeTruthy();
+    });
+
+    it("should not accept amount 12345", () => {
+      const model = transactionModel();
+
+      const fiftyCharacterRemark =
+        "qazwsxedcrfvtgbyhnujmiklopqazwsxedcrfvtgbyhnujmkilop";
+      model.remark = fiftyCharacterRemark;
+      expect(model.isValidRemark()).toBeFalsy();
+    });
+  });
 });
 
 const transactionModel = function() {

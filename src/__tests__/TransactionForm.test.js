@@ -142,17 +142,6 @@ describe("TransactionForm", () => {
       ).toBeUndefined();
     });
 
-    it("should not allow an empty remark to be entered", () => {
-      const transactionForm = shallow(<TransactionForm />);
-      const proceedButton = transactionForm.find("#proceed");
-
-      proceedButton.simulate("click");
-
-      expect(transactionForm.find("#remarkError").props().children).toEqual(
-        "Cannot be empty"
-      );
-    });
-
     it("should not allow a remark with more than 50 characters to be entered", () => {
       const transactionForm = shallow(<TransactionForm />);
       const proceedButton = transactionForm.find("#proceed");

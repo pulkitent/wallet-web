@@ -8,71 +8,53 @@ export class TransactionForm extends Component {
     this.state = {
       transaction: new TransactionModel(),
       message: "",
-      errors: {}
+      errors: []
     };
   }
 
-  handleValidation() {
-    let fields = this.state.transaction;
-    let errors = {};
-    let formIsValid = true;
-
-    //Remarks
-    if (!fields["remark"]) {
-      formIsValid = false;
-      errors["remark"] = "Cannot be empty";
-    }
-
-    if (typeof fields["remark"] !== "undefined") {
-      if (!fields["remark"].match(/^.{1,50}$/)) {
-        formIsValid = false;
-        errors["remark"] = "Only 50 characters allowed";
-      }
-    }
-
-    //Amount
-    if (!fields["amount"]) {
-      formIsValid = false;
-      errors["amount"] = "Cannot be empty";
-    }
-
-    if (typeof fields["amount"] !== "undefined") {
-      if (!fields["amount"].match(/^([1-9][0-9]{0,3}|10000)$/)) {
-        formIsValid = false;
-        errors["amount"] = "Amount should be between 1-10k";
-      }
-    }
-
-    this.setState({ errors: errors });
-    return formIsValid;
-  }
-
   handleAmountChange = event => {
+    let errors = {};
     // TODO: get wallet id from query params
-    this.setState({
-      transaction: new TransactionModel(
-        1,
-        this.props.type,
-        event.target.value,
-        this.state.transaction.remark
-      )
-    });
+    let newTransaction = new TransactionModel(
+      1,
+      this.props.type,
+      event.target.value,
+      this.state.transaction.remark
+    );
+    if (newTransaction.isValidAmount()) {
+      this.setState({
+        transaction: newTransaction,
+        errors: []
+      });
+    } else {
+      errors["amount"] = "Amount should be between 1-10k";
+      this.setState({ transaction:{}, ...this.state.errors, errors });
+    }
   };
 
   handleRemarkChange = event => {
-    // TODO: get wallet id from query params
-    this.setState({
-      transaction: new TransactionModel(
-        1,
-        this.props.type,
-        this.state.transaction.amount,
-        event.target.value
-      )
-    });
+    let errors = {};
+    let newTransaction = new TransactionModel(
+      1,
+      this.props.type,
+      this.state.transaction.amount,
+      event.target.value
+    );
+    if (newTransaction.isValidRemark()) {
+      // TODO: get wallet id from query params
+      this.setState({
+        transaction: newTransaction,
+        errors: []
+      });
+    } else {
+      errors["remark"] = "Only 50 characters allowed";
+      this.setState({ transaction:{}, ...this.state.errors, errors });
+    }
   };
 
-  handleFormSubmit = event => {
-    if (this.handleValidation()) {
+  handleFormSubmit = () => {
+    const errors = this.state.errors;
+    if (errors.length === 0) {
       this.state.transaction.save().then(() => {
         this.setState({ message: "Transaction successful" });
         this.props.onSuccess();

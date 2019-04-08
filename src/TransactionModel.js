@@ -30,12 +30,24 @@ export class TransactionModel {
     return this._remark;
   }
 
+  set remark(remark) {
+    this._remark = remark;
+  }
+
   get walletId() {
     return this._walletId;
   }
 
   get type() {
     return this._type;
+  }
+
+  isValidAmount() {
+    return this._amount > 0 && this._amount <= 10000;
+  }
+
+  isValidRemark() {
+    return this._remark.length > 0 && this._remark.length <= 50;
   }
 
   async save() {
