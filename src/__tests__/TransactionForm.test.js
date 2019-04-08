@@ -60,6 +60,10 @@ describe("TransactionForm", () => {
       const transactionForm = shallow(
         <TransactionForm onSuccess={handleTransaction} />
       );
+      const amount = transactionForm.find("#amount");
+      const remark = transactionForm.find("#remark");
+      amount.simulate("change", { target: { value: "10000" } });
+      remark.simulate("change", { target: { value: "Snack" } });
       transactionForm.state().transaction.save = saveFn;
 
       transactionForm.find("#proceed").simulate("click");
@@ -82,6 +86,87 @@ describe("TransactionForm", () => {
 
       await Promise.resolve();
       expect(transactionForm.find("#message").text()).toBe("");
+    });
+  });
+
+  describe("validate", () => {
+    it("should not allow an amount 12345 to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+      const amount = transactionForm.find("#amount");
+      amount.simulate("change", { target: { value: "12345" } });
+
+      proceedButton.simulate("click");
+
+      expect(transactionForm.find("#amountError").props().children).toEqual(
+        "Amount should be between 1-10k"
+      );
+    });
+
+    it("should not allow an amount 12345 to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+      const amount = transactionForm.find("#amount");
+      amount.simulate("change", { target: { value: "12345" } });
+
+      proceedButton.simulate("click");
+
+      expect(transactionForm.find("#amountError").props().children).toEqual(
+        "Amount should be between 1-10k"
+      );
+    });
+
+    it("should not allow an amount -1 to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+      const amount = transactionForm.find("#amount");
+      amount.simulate("change", { target: { value: "-1" } });
+
+      proceedButton.simulate("click");
+
+      expect(transactionForm.find("#amountError").props().children).toEqual(
+        "Amount should be between 1-10k"
+      );
+    });
+
+    it("should not allow an amount 10000 to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+      const amount = transactionForm.find("#amount");
+      amount.simulate("change", { target: { value: "10000" } });
+
+      proceedButton.simulate("click");
+
+      expect(
+        transactionForm.find("#amountError").props().children
+      ).toBeUndefined();
+    });
+
+    it("should not allow an empty remark to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+
+      proceedButton.simulate("click");
+
+      expect(transactionForm.find("#remarkError").props().children).toEqual(
+        "Cannot be empty"
+      );
+    });
+
+    it("should not allow a remark with more than 50 characters to be entered", () => {
+      const transactionForm = shallow(<TransactionForm />);
+      const proceedButton = transactionForm.find("#proceed");
+      const remark = transactionForm.find("#remark");
+
+      const fiftyCharacterRemark =
+        "qazwsxedcrfvtgbyhnujmiklopqazwsxedcrfvtgbyhnujmkilop";
+      remark.simulate("change", { target: { value: fiftyCharacterRemark } });
+
+      proceedButton.simulate("click");
+
+      expect(transactionForm.find("#remarkError").props().children).toEqual(
+        "Only 50 characters allowed"
+      );
     });
   });
 });
