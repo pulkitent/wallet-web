@@ -1,12 +1,17 @@
 import axios from "axios";
 
 export class TransactionModel {
-  constructor(walletId, type, amount, remark, createdAt) {
+  constructor(walletId, type, amount, remark, createdAt, id) {
+    this._id = id;
     this._type = type;
     this._amount = amount;
     this._remark = remark;
     this._walletId = walletId;
     this._createdAt = createdAt;
+  }
+
+  get id() {
+    return this._id;
   }
 
   get createdAt() {
@@ -53,10 +58,10 @@ export class TransactionModel {
         }/wallets/${walletId}/transactions`
       )
       .then(response => {
-        response.data.map(transaction => {
-          const { walletId, type, amount, remark, createdAt } = transaction;
+        response.data.forEach(transaction => {
+          const { id, walletId, type, amount, remark, createdAt } = transaction;
           transactions.push(
-            new TransactionModel(walletId, type, amount, remark, createdAt)
+            new TransactionModel(walletId, type, amount, remark, createdAt, id)
           );
         });
       });
