@@ -11,7 +11,7 @@ const transactionsList = {
       day: "3",
       month: "September",
       year: "2018",
-      remarks: "Snacks",
+      remark: "Snacks",
       transactionType: "DEBIT"
     },
     {
@@ -31,7 +31,7 @@ describe("TransactionsModel", () => {
     axios.get.mockResolvedValue(transactionsList);
     await TransactionsModel.fetch();
 
-    const transactionEndpoint = "basePath" + "/wallets/1/transactionModel";
+    const transactionEndpoint = "basePath" + "/wallets/1/transactions";
     expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
   });
 
@@ -40,6 +40,6 @@ describe("TransactionsModel", () => {
 
     const model = await TransactionsModel.fetch();
 
-    expect(model.transactionModel).toHaveLength(2);
+    expect(model).toHaveLength(2);
   });
 });

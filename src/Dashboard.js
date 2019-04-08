@@ -5,6 +5,7 @@ import Wallet from "./Wallet";
 import TransactionsModel from "./TransactionsModel";
 import Container from "react-bootstrap/Container";
 
+const walletIdContext = React.createContext(1);
 class Dashboard extends Component {
 
   constructor(props) {

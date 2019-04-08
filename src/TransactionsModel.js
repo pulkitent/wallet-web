@@ -13,8 +13,6 @@ export default class TransactionsModel {
     const transactions = await axios.get(
       `${process.env.REACT_APP_WALLET_API_URL}/wallets/1/transactions`
     );
-
-    console.log(transactions.data);
     return transactions.data;
   }
 }

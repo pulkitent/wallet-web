@@ -60,7 +60,7 @@ describe("FilterableTransactionsTable", () => {
     await Promise.resolve();
 
     expect(filterableTable.find(TransactionsTable)).toHaveLength(1);
-    expect(filterableTable.find(TransactionsTable).props().transactionModel).toBe(
+    expect(filterableTable.find(TransactionsTable).props().transactions).toBe(
       transactionsList
     );
   });

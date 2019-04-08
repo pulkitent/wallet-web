@@ -7,7 +7,7 @@ export default class TransactionRow extends React.Component {
     return (
       <tr>
         <td>{moment(createdAt).format("DD-MM-YYYY")}</td>
-        <td>{amount}</td>
+        <td>₹ {amount}</td>
         <td>{type}</td>
         <td>{remark}</td>
       </tr>
