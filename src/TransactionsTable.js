@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 
 export function TransactionsTable(props) {
   return (
-    <Table align={"center"} className={"table table-bordered table-hover"}>
+    <Table align={"center"} className={"table table-hover"}>
       <thead>
         <tr>
           <th>Date</th>

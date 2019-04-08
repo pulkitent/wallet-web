@@ -2,6 +2,7 @@ import { shallow } from "enzyme/build";
 import React from "react";
 import { TransactionsTable } from "../TransactionsTable";
 import TransactionRow from "../TransactionRow";
+import Table from "react-bootstrap/Table";
 
 describe("TransactionsTable", () => {
   const noFilter = "";
@@ -88,6 +89,19 @@ describe("TransactionsTable", () => {
       const filteredRows = transactionsTable.find(TransactionRow);
 
       expect(filteredRows).toHaveLength(1);
+    });
+
+    it("should display table hover", () => {
+      const transactionsTable = shallow(
+        <TransactionsTable
+          transactions={transactionsList}
+          searchText={"Snacks"}
+        />
+      );
+
+      expect(transactionsTable.find(Table).props().className).toEqual(
+        "table table-hover"
+      );
     });
   });
 });

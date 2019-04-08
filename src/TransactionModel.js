@@ -49,13 +49,14 @@ export class TransactionModel {
       .then(response => response);
   }
 
-  static async fetch(walletId) {
+  static async fetch(walletId, limit = "") {
+    const limitQuery = limit === "" ? "" : "?limit=" + limit;
     let transactions = [];
     await axios
       .get(
         `${
           process.env.REACT_APP_WALLET_API_URL
-        }/wallets/${walletId}/transactions?limit=5`
+        }/wallets/${walletId}/transactions${limitQuery}`
       )
       .then(response => {
         response.data.forEach(transaction => {

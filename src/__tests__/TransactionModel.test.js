@@ -50,8 +50,7 @@ describe("TransactionModel", () => {
     it("should be able to call transaction api", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
-      const transactionEndpoint =
-        "basePath" + "/wallets/1/transactions?limit=5";
+      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
 
       await TransactionModel.fetch(walletId);
 
@@ -67,6 +66,20 @@ describe("TransactionModel", () => {
 
       await Promise.resolve();
       expect(model).toHaveLength(2);
+    });
+
+    it("should be able to get transactions with limit 2", async () => {
+      axios.get.mockResolvedValue(Promise.resolve(response));
+      const walletId = 1;
+      const limit = 2;
+      const transactionEndpoint =
+        "basePath" + "/wallets/1/transactions?limit=" + limit;
+
+      const model = await TransactionModel.fetch(walletId, limit);
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
     });
   });
 });
