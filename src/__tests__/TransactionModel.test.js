@@ -21,16 +21,17 @@ describe("TransactionModel", () => {
       expect(axios.post).toHaveBeenCalledWith(endpointUrl, data);
     });
 
+    // TODO : Use enzyme promise test
     it("should be able add new transaction given id, type, amount, remark", async () => {
       axios.post.mockResolvedValue(
         new Promise(resolve => resolve(transaction))
       );
       const model = transactionModel();
-      let savedTransaction = {};
 
-      await model.save().then(response => (savedTransaction = response));
-
+      const savedTransaction = await model.save();
       await Promise.resolve();
+      await Promise.resolve();
+
       expect(savedTransaction).toEqual(transaction);
     });
   });
@@ -49,7 +50,8 @@ describe("TransactionModel", () => {
     it("should be able to call transaction api", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
-      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+      const transactionEndpoint =
+        "basePath" + "/wallets/1/transactions?limit=5";
 
       await TransactionModel.fetch(walletId);
 

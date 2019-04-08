@@ -38,7 +38,6 @@ describe("Dashboard", () => {
       const dashBoard = shallow(<Dashboard />);
       await Promise.resolve();
       await Promise.resolve();
-
       expect(
         dashBoard.find(TransactionsTable).props().transactions
       ).toHaveLength(2);

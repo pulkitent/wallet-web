@@ -55,7 +55,7 @@ export class TransactionModel {
       .get(
         `${
           process.env.REACT_APP_WALLET_API_URL
-        }/wallets/${walletId}/transactions`
+        }/wallets/${walletId}/transactions?limit=5`
       )
       .then(response => {
         response.data.forEach(transaction => {

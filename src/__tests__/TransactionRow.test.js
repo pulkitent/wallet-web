@@ -15,7 +15,7 @@ describe("TransactionRow", () => {
     const row = transactionRow.find("tr");
 
     expect(row).toHaveLength(1);
-    expect(row.find("td")).toHaveLength(4);
+    expect(row.find("td")).toHaveLength(3);
   });
 
   it("should display static data", () => {
@@ -34,11 +34,28 @@ describe("TransactionRow", () => {
 
     expect(row.childAt(0).text()).toBe(moment(new Date()).format("DD-MM-YYYY"));
     expect(row.childAt(1).text()).toContain("75");
-    expect(row.childAt(2).text()).toBe("DEBIT");
-    expect(row.childAt(3).text()).toBe("Snacks");
+    expect(row.childAt(2).text()).toBe("Snacks");
   });
 
   it("should display data from props", () => {
+    const transactionRow = shallow(
+      <TransactionRow
+        key={1}
+        transaction={{
+          month: "September",
+          amount: "75",
+          remark: "Snacks"
+        }}
+      />
+    );
+    const row = transactionRow.find("tr");
+
+    expect(row.childAt(0).text()).toBe(moment(new Date()).format("DD-MM-YYYY"));
+    expect(row.childAt(1).text()).toContain("75");
+    expect(row.childAt(2).text()).toBe("Snacks");
+  });
+
+  it("should show green row on type credit", () => {
     const transactionRow = shallow(
       <TransactionRow
         key={1}
@@ -50,11 +67,7 @@ describe("TransactionRow", () => {
         }}
       />
     );
-    const row = transactionRow.find("tr");
-
-    expect(row.childAt(0).text()).toBe(moment(new Date()).format("DD-MM-YYYY"));
-    expect(row.childAt(1).text()).toContain("75");
-    expect(row.childAt(2).text()).toBe("DEBIT");
-    expect(row.childAt(3).text()).toBe("Snacks");
+    const rowColor = transactionRow.find("tr");
+    expect(rowColor.props().class).toBe("table-danger");
   });
 });

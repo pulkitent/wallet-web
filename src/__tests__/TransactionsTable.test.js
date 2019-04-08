@@ -30,7 +30,7 @@ describe("TransactionsTable", () => {
     const transactions = shallow(<TransactionsTable transactions={[]} />);
     const headers = transactions.find("thead");
 
-    expect(headers.find("tr th")).toHaveLength(4);
+    expect(headers.find("tr th")).toHaveLength(3);
     expect(
       headers
         .find("tr")
@@ -47,12 +47,6 @@ describe("TransactionsTable", () => {
       headers
         .find("tr")
         .childAt(2)
-        .text()
-    ).toEqual("Type");
-    expect(
-      headers
-        .find("tr")
-        .childAt(3)
         .text()
     ).toEqual("Remarks");
   });
