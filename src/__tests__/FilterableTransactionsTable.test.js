@@ -40,7 +40,7 @@ describe("FilterableTransactionsTable", () => {
       expect(transactions.find(SearchBar)).toHaveLength(1);
     });
 
-    it("should able to filter transactionModel on search text", async () => {
+    it("should able to filter transactions on search text", async () => {
       const transactions = shallow(<FilterableTransactionsTable />);
       const search = transactions.find(SearchBar);
 
@@ -52,7 +52,7 @@ describe("FilterableTransactionsTable", () => {
     });
   });
 
-  it("should show transactionModel", async () => {
+  it("should show transactions", async () => {
     TransactionsModel.fetch = jest.fn();
     TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
     const filterableTable = shallow(<FilterableTransactionsTable />);

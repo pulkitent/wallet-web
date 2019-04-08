@@ -1,7 +1,31 @@
 import axios from "axios";
 import { TransactionModel } from "../TransactionModel";
+import * as React from "react";
 
 jest.mock("axios");
+
+const transactions = {
+  data: [
+    {
+      id: 1,
+      amount: 75,
+      day: "3",
+      month: "September",
+      year: "2018",
+      remark: "Snacks",
+      type: "DEBIT"
+    },
+    {
+      id: 2,
+      amount: 3000,
+      day: "7",
+      month: "September",
+      year: "2018",
+      remarks: "Petrol",
+      type: "DEBIT"
+    }
+  ]
+};
 
 const transaction = {
   id: 1,
@@ -16,7 +40,7 @@ describe("TransactionModel", () => {
     it("should call the endpoint on save", () => {
       const model = transactionModel();
       const endpointUrl =
-        "basePath/wallets/" + model.walletId + "/transactionModel";
+        "basePath/wallets/" + model.walletId + "/transactions";
       const data = {
         type: model.type,
         remark: model.remark,
@@ -51,8 +75,28 @@ describe("TransactionModel", () => {
       expect(model.amount).toBe(110);
     });
   });
+
+  describe("#fetch", () => {
+    it("should able to call transaction api", async () => {
+      axios.get.mockResolvedValue(transactions);
+      const walletId = React.createContext(1);
+      await TransactionModel.fetch(walletId);
+
+      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
+    });
+
+    it("should able get transaction list", async () => {
+      axios.get.mockResolvedValue(transactions);
+      const walletId = React.createContext(1);
+
+      const model = await TransactionModel.fetch(walletId);
+
+      expect(model).toHaveLength(2);
+    });
+  });
 });
 
 const transactionModel = function() {
-  return new TransactionModel(1, "CREDIT", 10, "Snacks");
+  return new TransactionModel(transaction);
 };

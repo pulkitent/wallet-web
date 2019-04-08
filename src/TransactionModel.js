@@ -38,4 +38,23 @@ export class TransactionModel {
       )
       .then(response => response);
   }
+
+  static async fetch(walletId) {
+    let transactions = [];
+    await axios
+      .get(
+        `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
+          walletId._currentValue
+        }/transactions`
+      )
+      .then(response => {
+        response.data.map(transaction => {
+          const { walletId, type, amount, remark } = transaction;
+          transactions.push(
+            new TransactionModel(walletId, type, amount, remark)
+          );
+        });
+      });
+    return transactions;
+  }
 }
