@@ -9,18 +9,29 @@ export class ToggleableTransaction extends Component {
     this.state = { showTransactionForm: false, type: "" };
   }
 
-  toggleCreditForm = () => {
+  toggleForm = value => {
     this.setState({
       showTransactionForm: !this.state.showTransactionForm,
-      type: "CREDIT"
+      type: value
     });
   };
 
   render() {
     return (
       <div className={"toggleable-transaction"}>
-        <Button variant="success" id="credit" onClick={this.toggleCreditForm}>
+        <Button
+          variant="success"
+          id="credit"
+          onClick={() => this.toggleForm("CREDIT")}
+        >
           Credit
+        </Button>
+        <Button
+          variant="danger"
+          id="debit"
+          onClick={() => this.toggleForm("DEBIT")}
+        >
+          Debit
         </Button>
         {(() => {
           if (this.state.showTransactionForm) {
@@ -28,7 +39,6 @@ export class ToggleableTransaction extends Component {
               <TransactionForm
                 type={this.state.type}
                 onSuccess={this.props.onSuccess}
-                style={{ padding: 100 }}
               />
             );
           }

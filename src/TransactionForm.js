@@ -45,37 +45,40 @@ export class TransactionForm extends Component {
   render() {
     return (
       <div>
-          <label htmlFor="amount" style={{ margin: 7 }}>
-            Amount
-          </label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            onChange={this.handleAmountChange}
-            value={this.state.transaction.amount}
-          />
-          <br />
-          <br />
-          <label htmlFor="remark" style={{ margin: 7 }}>
-            Remarks
-          </label>
-          <input
-            type="text"
-            id="remark"
-            name="remark"
-            onChange={this.handleRemarkChange}
-            value={this.state.transaction.remark}
-          />
-          <br />
-          <br />
-          <Button id="proceed" type="submit" variant="secondary" onClick={this.handleFormSubmit}>
-            Proceed
-          </Button>
-          <div id="message">{this.state.message}</div>
+        <label htmlFor="amount" style={{ margin: 7 }}>
+          Amount
+        </label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          onChange={this.handleAmountChange}
+          value={this.state.transaction.amount}
+        />
+        <br />
+        <br />
+        <label htmlFor="remark" style={{ margin: 7 }}>
+          Remarks
+        </label>
+        <input
+          type="text"
+          id="remark"
+          name="remark"
+          onChange={this.handleRemarkChange}
+          value={this.state.transaction.remark}
+        />
+        <br />
+        <br />
+        <Button
+          id="proceed"
+          type="submit"
+          variant="secondary"
+          onClick={this.handleFormSubmit}
+        >
+          Proceed
+        </Button>
+        <div id="message">{this.state.message}</div>
       </div>
     );
   }
 }
-
-// TODO: remove form

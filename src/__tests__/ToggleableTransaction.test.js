@@ -16,11 +16,28 @@ describe("ToggleableTransaction", () => {
       expect(credit).toHaveLength(1);
     });
 
+    it("should render debit button", () => {
+      const createTransaction = shallow(<ToggleableTransaction />);
+      const credit = createTransaction.find("#debit");
+
+      expect(credit).toHaveLength(1);
+    });
+
     it("should render a transaction form on click of credit", () => {
       const createTransaction = shallow(
         <ToggleableTransaction onSuccess={jest.fn()} />
       );
       createTransaction.find("#credit").simulate("click");
+      const transactionForm = createTransaction.find(TransactionForm);
+
+      expect(transactionForm).toHaveLength(1);
+    });
+
+    it("should render a transaction form on click of debit", () => {
+      const createTransaction = shallow(
+        <ToggleableTransaction onSuccess={jest.fn()} />
+      );
+      createTransaction.find("#debit").simulate("click");
       const transactionForm = createTransaction.find(TransactionForm);
 
       expect(transactionForm).toHaveLength(1);

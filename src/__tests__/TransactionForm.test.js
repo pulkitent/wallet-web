@@ -54,21 +54,6 @@ describe("TransactionForm", () => {
   });
 
   describe("#submit", () => {
-    it("should inform parent when transaction is saved successfully", async () => {
-      const handleTransaction = jest.fn();
-      const event = { preventDefault: jest.fn() };
-      const saveFn = jest.fn().mockResolvedValue(Promise.resolve({}));
-      const transactionForm = shallow(
-        <TransactionForm onSuccess={handleTransaction} />
-      );
-      transactionForm.state().transaction.save = saveFn;
-
-      transactionForm.find("#proceed").simulate("click", event);
-
-      await Promise.resolve();
-      expect(handleTransaction).toHaveBeenCalled();
-    });
-
     it("should display success message on successful transaction", async () => {
       const handleTransaction = jest.fn();
       const event = { preventDefault: jest.fn() };
@@ -86,7 +71,6 @@ describe("TransactionForm", () => {
       );
     });
 
-    // TODO : Remove prevent default
     it("should not display success message on failed transaction", async () => {
       const handleTransaction = jest.fn();
       const event = { preventDefault: jest.fn() };
