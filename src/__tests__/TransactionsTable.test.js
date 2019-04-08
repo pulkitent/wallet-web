@@ -12,8 +12,8 @@ describe("TransactionsTable", () => {
       day: "3",
       month: "September",
       year: "2018",
-      remarks: "Snacks",
-      transactionType: "DEBIT"
+      remark: "Snacks",
+      type: "DEBIT"
     },
     {
       id: 2,
@@ -21,8 +21,8 @@ describe("TransactionsTable", () => {
       day: "7",
       month: "September",
       year: "2018",
-      remarks: "Petrol",
-      transactionType: "DEBIT"
+      remark: "Petrol",
+      type: "DEBIT"
     }
   ];
 

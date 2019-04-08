@@ -54,6 +54,7 @@ export class ToggleableTransaction extends Component {
               <TransactionForm
                 type={this.state.type}
                 onSuccess={this.props.onSuccess}
+                style={{ padding: 100 }}
               />
             );
           }
