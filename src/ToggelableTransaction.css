@@ -1,3 +1,7 @@
 .toggleable-transaction {
   padding: 50px;
 }
+
+button {
+  margin: 5px;
+}

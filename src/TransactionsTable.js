@@ -15,7 +15,9 @@ export function TransactionsTable(props) {
         </tr>
       </thead>
       <tbody>
-        {props.transactions
+        {props.transactions.filter(transaction => {
+          return transaction.remark.indexOf(props.searchText) === 0;
+        })
           .map(transaction => {
             return (
               <TransactionRow key={transaction.id} transaction={transaction} />

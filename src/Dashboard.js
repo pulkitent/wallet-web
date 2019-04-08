@@ -23,7 +23,7 @@ class Dashboard extends Component {
       <Container>
         <Wallet/>
         <ToggleableTransaction onSuccess={() => {}} />
-        <TransactionsTable searchText="" transactions={this.state.transactionModel}/>
+        <TransactionsTable searchText={''} transactions={this.state.transactionModel}/>
       </Container>
     );
   }
