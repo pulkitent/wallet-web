@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import React from "react";
 import TransactionRow from "../TransactionRow";
+import moment from "moment";
 
 describe("TransactionRow", () => {
   it("should render without crash", () => {
@@ -24,15 +25,15 @@ describe("TransactionRow", () => {
         transaction={{
           month: "September",
           amount: "75",
-          transactionType: "DEBIT",
-          remarks: "Snacks"
+          type: "DEBIT",
+          remark: "Snacks"
         }}
       />
     );
     const row = transactionRow.find("tr");
 
-    expect(row.childAt(0).text()).toBe("September");
-    expect(row.childAt(1).text()).toBe("75");
+    expect(row.childAt(0).text()).toBe(moment(new Date()).format("DD-MM-YYYY"));
+    expect(row.childAt(1).text()).toContain("75");
     expect(row.childAt(2).text()).toBe("DEBIT");
     expect(row.childAt(3).text()).toBe("Snacks");
   });
@@ -44,15 +45,15 @@ describe("TransactionRow", () => {
         transaction={{
           month: "September",
           amount: "75",
-          transactionType: "DEBIT",
-          remarks: "Snacks"
+          type: "DEBIT",
+          remark: "Snacks"
         }}
       />
     );
     const row = transactionRow.find("tr");
 
-    expect(row.childAt(0).text()).toBe("September");
-    expect(row.childAt(1).text()).toBe("75");
+    expect(row.childAt(0).text()).toBe(moment(new Date()).format("DD-MM-YYYY"));
+    expect(row.childAt(1).text()).toContain("75");
     expect(row.childAt(2).text()).toBe("DEBIT");
     expect(row.childAt(3).text()).toBe("Snacks");
   });

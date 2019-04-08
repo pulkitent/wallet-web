@@ -11,7 +11,7 @@ const transactionsList = {
       day: "3",
       month: "September",
       year: "2018",
-      remarks: "Snacks",
+      remark: "Snacks",
       transactionType: "DEBIT"
     },
     {
@@ -40,6 +40,6 @@ describe("TransactionsModel", () => {
 
     const model = await TransactionsModel.fetch();
 
-    expect(model.transactions).toHaveLength(2);
+    expect(model).toHaveLength(2);
   });
 });
