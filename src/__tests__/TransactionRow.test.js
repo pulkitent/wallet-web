@@ -87,5 +87,4 @@ describe("TransactionRow", () => {
     const rowColor = transactionRow.find("tr");
     expect(rowColor.props().class).toBe("table-danger");
   });
-
 });
