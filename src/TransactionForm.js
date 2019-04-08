@@ -6,7 +6,8 @@ export class TransactionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      transaction: new TransactionModel()
+      transaction: new TransactionModel(),
+      message: ""
     };
   }
 
@@ -35,8 +36,8 @@ export class TransactionForm extends Component {
   };
 
   handleFormSubmit = event => {
-    event.preventDefault();
     this.state.transaction.save().then(() => {
+      this.setState({ message: "Transaction successful" });
       this.props.onSuccess();
     });
   };
@@ -44,39 +45,40 @@ export class TransactionForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <br />
-          <label htmlFor="amount" style={{ margin: 7 }}>
-            Amount
-          </label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            onChange={this.handleAmountChange}
-            value={this.state.transaction.amount}
-          />
-          <br />
-          <br />
-          <label htmlFor="remark" style={{ margin: 7 }}>
-            Remarks
-          </label>
-          <input
-            type="text"
-            id="remark"
-            name="remark"
-            onChange={this.handleRemarkChange}
-            value={this.state.transaction.remark}
-          />
-          <br />
-          <br />
-          <Button id="proceed" type="submit" variant="secondary">
-            Proceed
-          </Button>
-        </form>
+        <label htmlFor="amount" style={{ margin: 7 }}>
+          Amount
+        </label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          onChange={this.handleAmountChange}
+          value={this.state.transaction.amount}
+        />
+        <br />
+        <br />
+        <label htmlFor="remark" style={{ margin: 7 }}>
+          Remarks
+        </label>
+        <input
+          type="text"
+          id="remark"
+          name="remark"
+          onChange={this.handleRemarkChange}
+          value={this.state.transaction.remark}
+        />
+        <br />
+        <br />
+        <Button
+          id="proceed"
+          type="submit"
+          variant="secondary"
+          onClick={this.handleFormSubmit}
+        >
+          Proceed
+        </Button>
+        <div id="message">{this.state.message}</div>
       </div>
     );
   }
 }
-
-// TODO: remove form
