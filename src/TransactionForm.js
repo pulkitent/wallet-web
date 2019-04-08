@@ -11,6 +11,7 @@ export class TransactionForm extends Component {
       errors: {}
     };
   }
+
   handleValidation() {
     let fields = this.state.transaction;
     let errors = {};
@@ -90,7 +91,6 @@ export class TransactionForm extends Component {
           type="number"
           id="amount"
           name="amount"
-          pattern={/^([1-9][0-9]{0,3}|10000)$/}
           onChange={this.handleAmountChange}
           value={this.state.transaction.amount}
         />
@@ -107,7 +107,6 @@ export class TransactionForm extends Component {
           type="text"
           id="remark"
           name="remark"
-          pattern={/^.{1,50}$/}
           onChange={this.handleRemarkChange}
           value={this.state.transaction.remark}
         />
