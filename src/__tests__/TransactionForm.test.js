@@ -2,17 +2,12 @@ import React from "react";
 import { shallow } from "enzyme";
 import { TransactionForm } from "../TransactionForm";
 
+const TransactionModelMock = jest.fn();
+
 describe("TransactionForm", () => {
   describe("#render", () => {
     it("should render without crashing", () => {
       shallow(<TransactionForm />);
-    });
-
-    it("should render form", () => {
-      const transactionForm = shallow(<TransactionForm />);
-      const form = transactionForm.find("form");
-
-      expect(form).toHaveLength(1);
     });
 
     it("should render amount field", () => {
@@ -59,32 +54,34 @@ describe("TransactionForm", () => {
   });
 
   describe("#submit", () => {
-    it("should prevent default form submission", () => {
-      const event = { preventDefault: jest.fn() };
-      const form = shallow(<TransactionForm onSuccess={jest.fn()} />)
-        .find("form")
-        .first();
-      form.simulate("submit", event);
-
-      expect(event.preventDefault).toHaveBeenCalledTimes(1);
-    });
-
-    it("should inform parent when transaction is saved successfully", async () => {
+    it("should display success message on successful transaction", async () => {
       const handleTransaction = jest.fn();
-      const event = { preventDefault: jest.fn() };
       const saveFn = jest.fn().mockResolvedValue(Promise.resolve({}));
       const transactionForm = shallow(
         <TransactionForm onSuccess={handleTransaction} />
       );
       transactionForm.state().transaction.save = saveFn;
 
-      transactionForm
-        .find("form")
-        .first()
-        .simulate("submit", event);
+      transactionForm.find("#proceed").simulate("click");
 
       await Promise.resolve();
-      expect(handleTransaction).toHaveBeenCalled();
+      expect(transactionForm.find("#message").text()).toBe(
+        "Transaction successful"
+      );
+    });
+
+    it("should not display success message on failed transaction", async () => {
+      const handleTransaction = jest.fn();
+      const saveFn = jest.fn().mockResolvedValue(Promise.reject({}));
+      const transactionForm = shallow(
+        <TransactionForm onSuccess={handleTransaction} />
+      );
+      transactionForm.state().transaction.save = saveFn;
+
+      transactionForm.find("#proceed").simulate("click");
+
+      await Promise.resolve();
+      expect(transactionForm.find("#message").text()).toBe("");
     });
   });
 });

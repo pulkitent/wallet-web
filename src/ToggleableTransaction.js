@@ -38,7 +38,7 @@ export class ToggleableTransaction extends Component {
             return (
               <TransactionForm
                 type={this.state.type}
-                onSuccess={this.props.onSuccess()}
+                onSuccess={this.props.onSuccess}
               />
             );
           }
