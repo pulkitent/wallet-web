@@ -44,6 +44,7 @@ describe("TransactionRow", () => {
         transaction={{
           month: "September",
           amount: "75",
+          type: "CREDIT",
           remark: "Snacks"
         }}
       />
@@ -55,7 +56,23 @@ describe("TransactionRow", () => {
     expect(row.childAt(2).text()).toBe("Snacks");
   });
 
-  it("should show green row on type credit", () => {
+  it("should render green background for credit transaction", () => {
+    const transactionRow = shallow(
+      <TransactionRow
+        key={1}
+        transaction={{
+          month: "September",
+          amount: "75",
+          type: "CREDIT",
+          remark: "Snacks"
+        }}
+      />
+    );
+    const rowColor = transactionRow.find("tr");
+    expect(rowColor.props().class).toBe("table-success");
+  });
+
+  it("should render red background for debit transaction", () => {
     const transactionRow = shallow(
       <TransactionRow
         key={1}
@@ -70,4 +87,5 @@ describe("TransactionRow", () => {
     const rowColor = transactionRow.find("tr");
     expect(rowColor.props().class).toBe("table-danger");
   });
+
 });
