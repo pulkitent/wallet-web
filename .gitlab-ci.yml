@@ -7,15 +7,19 @@ cache:
 variables:
   REACT_APP_WALLET_API_URL: "https://codeplay-wallet-service.herokuapp.com/api"
 
+
+before_script:
+  - yarn install
+
 stages:
   - lint
   - test
+  - build
   - deploy
 
 lint:
   stage: lint
   script:
-    - yarn install
     - yarn lint
 
 test:
@@ -23,13 +27,16 @@ test:
   variables:
     REACT_APP_WALLET_API_URL: "basePath"
   script:
-    - yarn install
     - yarn test --coverage
+
+build:
+  stage: build
+  script:
+    - yarn build
 
 pages:
   stage: deploy
   script:
-    - yarn install
     - yarn build
     - rm -rf public
     - mv build public
