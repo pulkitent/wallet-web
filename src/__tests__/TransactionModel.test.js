@@ -4,37 +4,6 @@ import * as React from "react";
 
 jest.mock("axios");
 
-const transactions = {
-  data: [
-    {
-      id: 1,
-      amount: 75,
-      day: "3",
-      month: "September",
-      year: "2018",
-      remark: "Snacks",
-      type: "DEBIT"
-    },
-    {
-      id: 2,
-      amount: 3000,
-      day: "7",
-      month: "September",
-      year: "2018",
-      remarks: "Petrol",
-      type: "DEBIT"
-    }
-  ]
-};
-
-const transaction = {
-  id: 1,
-  walletId: 1,
-  amount: 10,
-  remark: "Snacks",
-  type: "CREDIT"
-};
-
 describe("TransactionModel", () => {
   describe("#save", () => {
     it("should call the endpoint on save", () => {
@@ -78,20 +47,23 @@ describe("TransactionModel", () => {
 
   describe("#fetch", () => {
     it("should able to call transaction api", async () => {
-      axios.get.mockResolvedValue(transactions);
-      const walletId = React.createContext(1);
+      axios.get.mockResolvedValue(Promise.resolve(response));
+      const walletId = 1;
+      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+
       await TransactionModel.fetch(walletId);
 
-      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+      await Promise.resolve();
       expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
     });
 
     it("should able get transaction list", async () => {
-      axios.get.mockResolvedValue(transactions);
-      const walletId = React.createContext(1);
+      axios.get.mockResolvedValue(Promise.resolve(response));
+      const walletId = 1;
 
       const model = await TransactionModel.fetch(walletId);
 
+      await Promise.resolve();
       expect(model).toHaveLength(2);
     });
   });
@@ -100,3 +72,18 @@ describe("TransactionModel", () => {
 const transactionModel = function() {
   return new TransactionModel(transaction);
 };
+
+const transaction = {
+  id: 1,
+  walletId: 1,
+  amount: 10,
+  remark: "Snacks",
+  type: "CREDIT"
+};
+
+const transactions = [
+  new TransactionModel(1, "DEBIT", 75, "Snacks"),
+  new TransactionModel(1, "CREDIT", 175, "Pen")
+];
+
+const response = { data: transactions };

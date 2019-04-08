@@ -1,11 +1,16 @@
 import axios from "axios";
 
 export class TransactionModel {
-  constructor(walletId, type, amount, remark) {
+  constructor(walletId, type, amount, remark, createdAt) {
     this._type = type;
     this._amount = amount;
     this._remark = remark;
     this._walletId = walletId;
+    this._createdAt = createdAt;
+  }
+
+  get createdAt() {
+    return this._createdAt;
   }
 
   set amount(value) {
@@ -43,15 +48,15 @@ export class TransactionModel {
     let transactions = [];
     await axios
       .get(
-        `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
-          walletId._currentValue
-        }/transactions`
+        `${
+          process.env.REACT_APP_WALLET_API_URL
+        }/wallets/${walletId}/transactions`
       )
       .then(response => {
         response.data.map(transaction => {
-          const { walletId, type, amount, remark } = transaction;
+          const { walletId, type, amount, remark, createdAt } = transaction;
           transactions.push(
-            new TransactionModel(walletId, type, amount, remark)
+            new TransactionModel(walletId, type, amount, remark, createdAt)
           );
         });
       });
