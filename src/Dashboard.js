@@ -7,10 +7,9 @@ import Container from "react-bootstrap/Container";
 
 const walletIdContext = React.createContext(1);
 class Dashboard extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {transactions : []};
+    this.state = { transactions: [] };
   }
 
   async componentDidMount() {
@@ -21,9 +20,12 @@ class Dashboard extends Component {
   render() {
     return (
       <Container>
-        <Wallet/>
+        <Wallet />
         <ToggleableTransaction onSuccess={() => {}} />
-        <TransactionsTable searchText={''} transactions={this.state.transactions}/>
+        <TransactionsTable
+          searchText={""}
+          transactions={this.state.transactions}
+        />
       </Container>
     );
   }
