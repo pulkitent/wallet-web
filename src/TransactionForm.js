@@ -99,7 +99,6 @@ export class TransactionForm extends Component {
           {this.state.errors["amount"]}
         </span>
         <br />
-        <br />
         <label htmlFor="remark" style={{ margin: 7 }}>
           Remarks
         </label>
@@ -114,7 +113,6 @@ export class TransactionForm extends Component {
         <span id="remarkError" style={{ color: "red" }}>
           {this.state.errors["remark"]}
         </span>
-        <br />
         <br />
         <Button
           id="proceed"
