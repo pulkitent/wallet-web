@@ -1,18 +1,17 @@
 import React from "react";
-import TransactionsModel from "./TransactionsModel";
 import SearchBar from "./SearchBar";
 import { TransactionsTable } from "./TransactionsTable";
+import { TransactionModel } from "./TransactionModel";
 
 export default class FilterableTransactionsTable extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { model: new TransactionsModel([]), searchText: "" };
+    this.state = { transactions: [], searchText: "" };
   }
 
-  componentDidMount() {
-    TransactionsModel.fetch().then(transactions => {
-      this.setState({ model: transactions });
-    });
+  async componentDidMount() {
+    const transactions = await TransactionModel.fetchAll({ walletId: 1 });
+    this.setState({ transactions: transactions });
   }
 
   handleSearch = searchText => {
@@ -26,7 +25,7 @@ export default class FilterableTransactionsTable extends React.Component {
         <br />
         <TransactionsTable
           searchText={this.state.searchText}
-          transactions={this.state.model.transactions}
+          transactions={this.state.transactions}
         />
       </div>
     );
