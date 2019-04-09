@@ -1,8 +1,13 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { TransactionForm } from "../TransactionForm";
+import axios from "axios";
+import { ToggleableTransaction } from "../ToggleableTransaction";
+import Wallet from "../Wallet";
+import WalletModel from "../WalletModel";
 
 const TransactionModelMock = jest.fn();
+jest.mock("axios");
 
 describe("TransactionForm", () => {
   describe("#render", () => {
@@ -126,6 +131,26 @@ describe("TransactionForm", () => {
 
       expect(transactionForm.find("#amountError").props().children).toEqual(
         "Amount should be between 1-10k"
+      );
+    });
+
+    it("should not allow an amount more than wallet balance to be debited", async () => {
+      axios.post = jest.fn();
+      axios.post.mockRejectedValue({
+        response: { data: { message: "Amount should not exceed wallet balance" } }
+      });
+      const transactionForm = shallow(<TransactionForm type={"DEBIT"} />);
+      const proceedButton = transactionForm.find("#proceed");
+      const amount = transactionForm.find("#amount");
+
+      amount.simulate("change", { target: { value: "3000" } });
+
+      proceedButton.simulate("click");
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(transactionForm.find("#amountError").text()).toEqual(
+        "Amount should not exceed wallet balance"
       );
     });
 

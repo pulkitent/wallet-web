@@ -8,7 +8,7 @@ export class TransactionForm extends Component {
     this.state = {
       transaction: new TransactionModel(),
       message: "",
-      errors: []
+      errors: {}
     };
   }
 
@@ -28,7 +28,7 @@ export class TransactionForm extends Component {
       });
     } else {
       errors["amount"] = "Amount should be between 1-10k";
-      this.setState({ transaction:{}, ...this.state.errors, errors });
+      this.setState({ transaction: {}, ...this.state.errors, errors });
     }
   };
 
@@ -48,24 +48,29 @@ export class TransactionForm extends Component {
       });
     } else {
       errors["remark"] = "Only 50 characters allowed";
-      this.setState({ transaction:{}, ...this.state.errors, errors });
+      this.setState({ transaction: {}, ...this.state.errors, errors });
     }
   };
 
   handleFormSubmit = () => {
     const errors = this.state.errors;
     if (errors.length === 0) {
-      this.state.transaction.save().then(() => {
-        this.setState({ message: "Transaction successful" });
-        this.props.onSuccess();
-      });
+      this.state.transaction.save()
+        .then(() => {
+          this.setState({ message: "Transaction successful" });
+          this.props.onSuccess();
+        })
+        .catch((error) => {
+          errors["amount"] = error.response.data.message;
+          this.setState({ errors: errors });
+        });
     }
   };
 
   render() {
     return (
       <div>
-        <br />
+        <br/>
         <label htmlFor="amount" style={{ margin: 7 }}>
           Amount
         </label>
@@ -76,11 +81,11 @@ export class TransactionForm extends Component {
           onChange={this.handleAmountChange}
           value={this.state.transaction.amount}
         />
-        <br />
+        <br/>
         <span id="amountError" style={{ color: "red" }}>
           {this.state.errors["amount"]}
         </span>
-        <br />
+        <br/>
         <label htmlFor="remark" style={{ margin: 7 }}>
           Remarks
         </label>
@@ -91,11 +96,11 @@ export class TransactionForm extends Component {
           onChange={this.handleRemarkChange}
           value={this.state.transaction.remark}
         />
-        <br />
+        <br/>
         <span id="remarkError" style={{ color: "red" }}>
           {this.state.errors["remark"]}
         </span>
-        <br />
+        <br/>
         <Button
           id="proceed"
           type="submit"
