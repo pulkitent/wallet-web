@@ -71,7 +71,7 @@ describe("TransactionModel", () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
 
-      const transactions = await TransactionModel.fetchAll(walletId);
+      const transactions = await TransactionModel.fetchAll({walletId : 1});
 
       await Promise.resolve();
       expect(transactions).toHaveLength(2);
