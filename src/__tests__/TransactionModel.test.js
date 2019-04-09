@@ -21,16 +21,17 @@ describe("TransactionModel", () => {
       expect(axios.post).toHaveBeenCalledWith(endpointUrl, data);
     });
 
+    // TODO : Use enzyme promise test
     it("should be able add new transaction given id, type, amount, remark", async () => {
       axios.post.mockResolvedValue(
         new Promise(resolve => resolve(transaction))
       );
       const model = transactionModel();
-      let savedTransaction = {};
 
-      await model.save().then(response => (savedTransaction = response));
-
+      const savedTransaction = await model.save();
       await Promise.resolve();
+      await Promise.resolve();
+
       expect(savedTransaction).toEqual(transaction);
     });
   });
@@ -54,7 +55,9 @@ describe("TransactionModel", () => {
       await TransactionModel.fetch(walletId);
 
       await Promise.resolve();
-      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint, {
+        params: { limit: "" }
+      });
     });
 
     it("should be able to get transactions", async () => {
@@ -64,6 +67,21 @@ describe("TransactionModel", () => {
 
       await Promise.resolve();
       expect(model).toHaveLength(2);
+    });
+
+    it("should be able to get transactions with limit 2", async () => {
+      axios.get.mockResolvedValue(Promise.resolve(response));
+      const walletId = 1;
+      const limit = 2;
+      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
+
+      const model = await TransactionModel.fetch(walletId, limit);
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint, {
+        params: { limit: "" }
+      });
     });
 
     it("should be able to get all transactions for given wallet Id", async () => {
