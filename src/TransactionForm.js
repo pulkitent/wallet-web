@@ -8,13 +8,12 @@ export class TransactionForm extends Component {
     this.state = {
       transaction: new TransactionModel(),
       message: "",
-      amountErrors: {},
-      remarksErrors: {}
+      amountError: "",
+      remarksError: ""
     };
   }
 
   handleAmountChange = event => {
-    let errors = {};
     // TODO: get wallet id from query params
     let newTransaction = new TransactionModel(
       1,
@@ -22,55 +21,54 @@ export class TransactionForm extends Component {
       event.target.value,
       this.state.transaction.remark
     );
-    this.validateAmountChange(newTransaction, errors);
+    this.validateAmountChange(newTransaction);
   };
 
-  validateAmountChange(newTransaction, errors) {
+  validateAmountChange(newTransaction) {
     if (newTransaction.isValidAmount()) {
       this.setState({
         transaction: newTransaction,
-        amountErrors: []
+        amountError: []
       });
     } else {
-      errors["amount"] = "Amount should be between 1-10k";
-      this.setState({ transaction: {}, amountErrors: errors });
+      let amountError = "Amount should be between 1-10k";
+      this.setState({ transaction: {}, amountError: amountError });
     }
   }
 
   handleRemarkChange = event => {
-    let errors = {};
     let newTransaction = new TransactionModel(
       1,
       this.props.type,
       this.state.transaction.amount,
       event.target.value
     );
-    this.validateRemarkChange(newTransaction, errors);
+    this.validateRemarkChange(newTransaction);
   };
 
-  validateRemarkChange(newTransaction, errors) {
+  validateRemarkChange(newTransaction) {
     if (newTransaction.isValidRemark()) {
       // TODO: get wallet id from query params
       this.setState({
         transaction: newTransaction,
-        remarksErrors: []
+        remarksError: []
       });
     } else {
-      errors["remark"] = "Only 50 characters allowed";
-      this.setState({ transaction: {}, remarksErrors: errors });
+      let remarkError = "Only 50 characters allowed";
+      this.setState({ transaction: {}, remarksError: remarkError });
     }
   }
 
   handleFormSubmit = () => {
-    const amountErrors = this.state.amountErrors;
-    const remarksErrors = this.state.remarksErrors;
+    const amountError = this.state.amountError;
+    const remarksError = this.state.remarksError;
 
-    if (amountErrors.length === 0 && remarksErrors.length === 0) {
-      this.saveTransaction(amountErrors);
+    if (amountError.length === 0 && remarksError.length === 0) {
+      this.saveTransaction();
     }
   };
 
-  saveTransaction(amountErrors) {
+  saveTransaction() {
     this.state.transaction
       .save()
       .then(() => {
@@ -78,8 +76,8 @@ export class TransactionForm extends Component {
         this.props.onSuccess();
       })
       .catch(error => {
-        amountErrors["amount"] = error.response.data.message;
-        this.setState({ amountErrors: amountErrors });
+        const amountError = error.response.data.message;
+        this.setState({ amountError: amountError });
       });
   }
 
@@ -99,7 +97,7 @@ export class TransactionForm extends Component {
         />
         <br />
         <span id="amountError" style={{ color: "red" }}>
-          {this.state.amountErrors["amount"]}
+          {this.state.amountError}
         </span>
         <br />
         <label htmlFor="remark" style={{ margin: 7 }}>
@@ -114,7 +112,7 @@ export class TransactionForm extends Component {
         />
         <br />
         <span id="remarkError" style={{ color: "red" }}>
-          {this.state.remarksErrors["remark"]}
+          {this.state.remarksError}
         </span>
         <br />
         <Button
