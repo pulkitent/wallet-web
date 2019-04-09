@@ -80,6 +80,16 @@ describe("TransactionModel", () => {
       await Promise.resolve();
 
       expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
+  });
+
+    it("should be able to get all transactions for given wallet Id", async () => {
+      axios.get.mockResolvedValue(Promise.resolve(response));
+      const walletId = 1;
+
+      const transactions = await TransactionModel.fetchAll({ walletId: 1 });
+
+      await Promise.resolve();
+      expect(transactions).toHaveLength(2);
     });
   });
 });
