@@ -10,6 +10,12 @@ export class TransactionModel {
     this._createdAt = createdAt;
   }
 
+  static transactionsUrl(walletId) {
+    return `${
+      process.env.REACT_APP_WALLET_API_URL
+    }/wallets/${walletId}/transactions`;
+  }
+
   get id() {
     return this._id;
   }
@@ -40,47 +46,20 @@ export class TransactionModel {
 
   async save() {
     return axios
-      .post(
-        `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
-          this._walletId
-        }/transactions`,
-        {
-          type: this._type,
-          amount: this._amount,
-          remark: this._remark
-        }
-      )
+      .post(TransactionModel.transactionsUrl(this._walletId), {
+        type: this._type,
+        amount: this._amount,
+        remark: this._remark
+      })
       .then(response => response);
   }
 
-  static async fetch(walletId, limit = "") {
+  static async fetchAll({ walletId, limit = "" }) {
     let transactions = [];
     await axios
-      .get(
-        `${
-          process.env.REACT_APP_WALLET_API_URL
-        }/wallets/${walletId}/transactions`,
-        { params: { limit: limit } }
-      )
-      .then(response => {
-        response.data.forEach(transaction => {
-          const { id, walletId, type, amount, remark, createdAt } = transaction;
-          transactions.push(
-            new TransactionModel(walletId, type, amount, remark, createdAt, id)
-          );
-        });
-      });
-    return transactions;
-  }
-
-  static async fetchAll({ walletId }) {
-    let transactions = [];
-    await axios
-      .get(
-        `${
-          process.env.REACT_APP_WALLET_API_URL
-        }/wallets/${walletId}/transactions`
-      )
+      .get(TransactionModel.transactionsUrl(walletId), {
+        params: { limit: limit }
+      })
       .then(response => {
         response.data.forEach(transaction => {
           const { id, walletId, type, amount, remark, createdAt } = transaction;
