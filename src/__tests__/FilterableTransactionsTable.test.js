@@ -13,7 +13,7 @@ const transactionsList = [
     month: "September",
     year: "2018",
     remarks: "Snacks",
-    transactionType: "DEBIT"
+    transactionType: "DEBIT12345"
   },
   {
     id: 2,
