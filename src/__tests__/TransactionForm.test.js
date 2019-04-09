@@ -2,9 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 import { TransactionForm } from "../TransactionForm";
 import axios from "axios";
-import { ToggleableTransaction } from "../ToggleableTransaction";
-import Wallet from "../Wallet";
-import WalletModel from "../WalletModel";
 
 const TransactionModelMock = jest.fn();
 jest.mock("axios");
@@ -95,7 +92,7 @@ describe("TransactionForm", () => {
   });
 
   describe("validate", () => {
-    it("should not allow an amount 12345 to be entered", () => {
+    it("should not allow an amount 12345 to be entered as it exceeds amount limit of 10k", () => {
       const transactionForm = shallow(<TransactionForm />);
       const proceedButton = transactionForm.find("#proceed");
       const amount = transactionForm.find("#amount");
@@ -103,25 +100,12 @@ describe("TransactionForm", () => {
 
       proceedButton.simulate("click");
 
-      expect(transactionForm.find("#amountError").props().children).toEqual(
+      expect(transactionForm.find("#amountError").text()).toEqual(
         "Amount should be between 1-10k"
       );
     });
 
-    it("should not allow an amount 12345 to be entered", () => {
-      const transactionForm = shallow(<TransactionForm />);
-      const proceedButton = transactionForm.find("#proceed");
-      const amount = transactionForm.find("#amount");
-      amount.simulate("change", { target: { value: "12345" } });
-
-      proceedButton.simulate("click");
-
-      expect(transactionForm.find("#amountError").props().children).toEqual(
-        "Amount should be between 1-10k"
-      );
-    });
-
-    it("should not allow an amount -1 to be entered", () => {
+    it("should not allow an amount -1 to be entered as it is not between the limits 1-10k", () => {
       const transactionForm = shallow(<TransactionForm />);
       const proceedButton = transactionForm.find("#proceed");
       const amount = transactionForm.find("#amount");
@@ -144,8 +128,9 @@ describe("TransactionForm", () => {
       const transactionForm = shallow(<TransactionForm type={"DEBIT"} />);
       const proceedButton = transactionForm.find("#proceed");
       const amount = transactionForm.find("#amount");
-
       amount.simulate("change", { target: { value: "3000" } });
+      const remark = transactionForm.find("#remark");
+      remark.simulate("change", { target: { value: "Snacks" } });
 
       proceedButton.simulate("click");
       await Promise.resolve();
@@ -156,7 +141,7 @@ describe("TransactionForm", () => {
       );
     });
 
-    it("should not allow an amount 10000 to be entered", () => {
+    it("should allow an amount 10000 to be entered as it's between the valid range 1-10k", () => {
       const transactionForm = shallow(<TransactionForm />);
       const proceedButton = transactionForm.find("#proceed");
       const amount = transactionForm.find("#amount");
