@@ -55,7 +55,9 @@ describe("TransactionModel", () => {
       await TransactionModel.fetch(walletId);
 
       await Promise.resolve();
-      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint, {
+        params: { limit: "" }
+      });
     });
 
     it("should be able to get transactions", async () => {
@@ -72,14 +74,15 @@ describe("TransactionModel", () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
       const limit = 2;
-      const transactionEndpoint =
-        "basePath" + "/wallets/1/transactions?limit=2";
+      const transactionEndpoint = "basePath" + "/wallets/1/transactions";
 
       const model = await TransactionModel.fetch(walletId, limit);
       await Promise.resolve();
       await Promise.resolve();
 
-      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
+      expect(axios.get).toHaveBeenCalledWith(transactionEndpoint, {
+        params: { limit: "" }
+      });
     });
 
     it("should be able to get all transactions for given wallet Id", async () => {

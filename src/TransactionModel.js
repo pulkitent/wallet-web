@@ -38,10 +38,6 @@ export class TransactionModel {
     return this._type;
   }
 
-  static buildQueryParam(limit) {
-    return limit === "" ? "" : "?limit=" + limit;
-  }
-
   async save() {
     return axios
       .post(
@@ -54,13 +50,13 @@ export class TransactionModel {
   }
 
   static async fetch(walletId, limit = "") {
-    const queryParam = this.buildQueryParam(limit);
     let transactions = [];
     await axios
       .get(
         `${
           process.env.REACT_APP_WALLET_API_URL
-        }/wallets/${walletId}/transactions${queryParam}`
+        }/wallets/${walletId}/transactions`,
+        { params: { limit: limit } }
       )
       .then(response => {
         response.data.forEach(transaction => {
