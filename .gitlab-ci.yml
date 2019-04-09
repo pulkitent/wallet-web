@@ -6,6 +6,7 @@ cache:
 
 variables:
   REACT_APP_WALLET_API_URL: "https://codeplay-wallet-service.herokuapp.com/api"
+  REACT_APP_PUBLIC_URL: "/ep-03/project-simulation/team-1/wallet-web/"
 
 
 before_script:

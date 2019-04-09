@@ -3,7 +3,9 @@ import { TransactionModel } from "../TransactionModel";
 import React from "react";
 
 jest.mock("axios");
-
+const fetchParams = {
+  walletId: 1
+};
 describe("TransactionModel", () => {
   describe("#save", () => {
     it("should be able to call the endpoint on save", () => {
@@ -46,13 +48,12 @@ describe("TransactionModel", () => {
     });
   });
 
-  describe("#fetch", () => {
+  describe("#fetchAll", () => {
     it("should be able to call transaction api", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
-      const walletId = 1;
       const transactionEndpoint = "basePath" + "/wallets/1/transactions";
 
-      await TransactionModel.fetch(walletId);
+      await TransactionModel.fetchAll(fetchParams);
 
       await Promise.resolve();
       expect(axios.get).toHaveBeenCalledWith(transactionEndpoint, {
@@ -62,9 +63,7 @@ describe("TransactionModel", () => {
 
     it("should be able to get transactions", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
-      const walletId = 1;
-
-      const model = await TransactionModel.fetch(walletId);
+      const model = await TransactionModel.fetchAll(fetchParams);
 
       await Promise.resolve();
       expect(model).toHaveLength(2);
@@ -72,11 +71,10 @@ describe("TransactionModel", () => {
 
     it("should be able to get transactions with limit 2", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
-      const walletId = 1;
-      const limit = 2;
+      fetchParams.limit = 2;
       const transactionEndpoint = "basePath" + "/wallets/1/transactions";
 
-      const model = await TransactionModel.fetch(walletId, limit);
+      const model = await TransactionModel.fetchAll(fetchParams);
       await Promise.resolve();
       await Promise.resolve();
 
@@ -87,9 +85,7 @@ describe("TransactionModel", () => {
 
     it("should be able to get all transactions for given wallet Id", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
-      const walletId = 1;
-
-      const transactions = await TransactionModel.fetchAll({ walletId: 1 });
+      const transactions = await TransactionModel.fetchAll(fetchParams);
 
       await Promise.resolve();
       expect(transactions).toHaveLength(2);
