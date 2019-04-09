@@ -5,12 +5,11 @@ import Table from "react-bootstrap/Table";
 
 export function TransactionsTable(props) {
   return (
-    <Table align={"center"}>
+    <Table align={"center"} className={"table table-hover"}>
       <thead>
         <tr>
           <th>Date</th>
           <th>Amount</th>
-          <th>Type</th>
           <th>Remarks</th>
         </tr>
       </thead>

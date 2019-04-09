@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import FilterableTransactionsTable from "../FilterableTransactionsTable";
-import TransactionsModel from "../TransactionsModel";
 import SearchBar from "../SearchBar";
 import { TransactionsTable } from "../TransactionsTable";
+import { TransactionModel } from "../TransactionModel";
 
 const transactionsList = [
   {
@@ -25,8 +25,6 @@ const transactionsList = [
     transactionType: "DEBIT"
   }
 ];
-
-const modelWithTwoTransactions = new TransactionsModel(transactionsList);
 
 describe("FilterableTransactionsTable", () => {
   it("should render without crashing", () => {
@@ -53,8 +51,8 @@ describe("FilterableTransactionsTable", () => {
   });
 
   it("should show transactions", async () => {
-    TransactionsModel.fetch = jest.fn();
-    TransactionsModel.fetch.mockResolvedValue(modelWithTwoTransactions);
+    TransactionModel.fetchAll = jest.fn();
+    TransactionModel.fetchAll.mockResolvedValue(transactionsList);
     const filterableTable = shallow(<FilterableTransactionsTable />);
 
     await Promise.resolve();

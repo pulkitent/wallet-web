@@ -15,7 +15,8 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     const transactions = await TransactionModel.fetch(
-      walletIdContext._currentValue
+      walletIdContext._currentValue,
+      5
     );
     this.setState({ transactions: transactions });
   }

@@ -30,7 +30,7 @@ describe("Dashboard", () => {
   });
 
   describe("#componentDidMount", () => {
-    it("should fetch transactions", async () => {
+    it("should fetch transactions and pass to TransactionsTable", async () => {
       TransactionModel.fetch = jest
         .fn()
         .mockResolvedValue(Promise.resolve(transactions));
