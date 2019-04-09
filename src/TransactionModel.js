@@ -55,7 +55,7 @@ export class TransactionModel {
       .post(
         `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
           this._walletId
-          }/transactions`,
+        }/transactions`,
         { type: this._type, amount: this._amount, remark: this._remark }
       )
       .then(response => response);
@@ -87,7 +87,7 @@ export class TransactionModel {
       .get(
         `${
           process.env.REACT_APP_WALLET_API_URL
-          }/wallets/${walletId}/transactions`
+        }/wallets/${walletId}/transactions`
       )
       .then(response => {
         response.data.forEach(transaction => {

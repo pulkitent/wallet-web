@@ -137,7 +137,9 @@ describe("TransactionForm", () => {
     it("should not allow an amount more than wallet balance to be debited", async () => {
       axios.post = jest.fn();
       axios.post.mockRejectedValue({
-        response: { data: { message: "Amount should not exceed wallet balance" } }
+        response: {
+          data: { message: "Amount should not exceed wallet balance" }
+        }
       });
       const transactionForm = shallow(<TransactionForm type={"DEBIT"} />);
       const proceedButton = transactionForm.find("#proceed");
