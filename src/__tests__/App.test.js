@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "../App";
 import { shallow } from "enzyme";
-import Dashboard from "../Dashboard";
 import { NavigationBar } from "../NavigationBar";
 
 describe("App", () => {
@@ -19,14 +18,6 @@ describe("App", () => {
       const app = shallow(<App />);
 
       expect(app.find(NavigationBar)).toHaveLength(1);
-    });
-  });
-
-  describe("Dashboard", () => {
-    it("Dashboard should be present", () => {
-      const app = shallow(<App />);
-
-      expect(app.find(Dashboard)).toHaveLength(1);
     });
   });
 });
