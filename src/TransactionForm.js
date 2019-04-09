@@ -86,7 +86,7 @@ export class TransactionForm extends Component {
   render() {
     return (
       <div>
-        <br/>
+        <br />
         <label htmlFor="amount" style={{ margin: 7 }}>
           Amount
         </label>
@@ -97,11 +97,11 @@ export class TransactionForm extends Component {
           onChange={this.handleAmountChange}
           value={this.state.transaction.amount}
         />
-        <br/>
+        <br />
         <span id="amountError" style={{ color: "red" }}>
           {this.state.amountErrors["amount"]}
         </span>
-        <br/>
+        <br />
         <label htmlFor="remark" style={{ margin: 7 }}>
           Remarks
         </label>
@@ -112,11 +112,11 @@ export class TransactionForm extends Component {
           onChange={this.handleRemarkChange}
           value={this.state.transaction.remark}
         />
-        <br/>
+        <br />
         <span id="remarkError" style={{ color: "red" }}>
           {this.state.remarksErrors["remark"]}
         </span>
-        <br/>
+        <br />
         <Button
           id="proceed"
           type="submit"
