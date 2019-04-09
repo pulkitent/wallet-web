@@ -30,8 +30,8 @@ describe("Dashboard", () => {
   });
 
   describe("#componentDidMount", () => {
-    it("should fetch transactions and pass to TransactionsTable", async () => {
-      TransactionModel.fetch = jest
+    it("should fetchAll transactions and pass to TransactionsTable", async () => {
+      TransactionModel.fetchAll = jest
         .fn()
         .mockResolvedValue(Promise.resolve(transactions));
 

@@ -14,10 +14,11 @@ class Dashboard extends Component {
   }
 
   async componentDidMount() {
-    const transactions = await TransactionModel.fetch(
-      walletIdContext._currentValue,
-      5
-    );
+    const fetchParams = {
+      walletId: walletIdContext._currentValue,
+      limit: 5
+    };
+    const transactions = await TransactionModel.fetchAll(fetchParams);
     this.setState({ transactions: transactions });
   }
 
