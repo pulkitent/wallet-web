@@ -38,7 +38,9 @@ describe("App", () => {
       const dashboardRoute = app.find(Route).get(1);
 
       expect(dashboardRoute.props.path).toBe("/transactions");
-      expect(dashboardRoute.props.component).toEqual(FilterableTransactionsTable);
+      expect(dashboardRoute.props.component).toEqual(
+        FilterableTransactionsTable
+      );
     });
   });
 });
