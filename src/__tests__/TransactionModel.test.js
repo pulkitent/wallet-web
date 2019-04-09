@@ -73,7 +73,7 @@ describe("TransactionModel", () => {
       const walletId = 1;
       const limit = 2;
       const transactionEndpoint =
-        "basePath" + "/wallets/1/transactions?limit=" + limit;
+        "basePath" + "/wallets/1/transactions?limit=2";
 
       const model = await TransactionModel.fetch(walletId, limit);
       await Promise.resolve();
