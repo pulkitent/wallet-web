@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 export function NavigationBar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <LinkContainer exact to="/">

@@ -24,13 +24,13 @@ describe("App", () => {
     });
   });
 
-  describe("Route", () => {
+  describe("Menu", () => {
     it("should route to Dashboard on /", () => {
       const app = shallow(<App />);
       const dashboardRoute = app.find(Route).get(0);
 
       expect(dashboardRoute.props.path).toBe("/");
-      expect(dashboardRoute.props.component()).toEqual(<Dashboard />);
+      expect(dashboardRoute.props.component).toEqual(Dashboard);
     });
 
     it("should route to Transactions on /transactions", () => {
@@ -38,9 +38,7 @@ describe("App", () => {
       const dashboardRoute = app.find(Route).get(1);
 
       expect(dashboardRoute.props.path).toBe("/transactions");
-      expect(dashboardRoute.props.component()).toEqual(
-        <FilterableTransactionsTable />
-      );
+      expect(dashboardRoute.props.component).toEqual(FilterableTransactionsTable);
     });
   });
 });

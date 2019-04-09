@@ -11,12 +11,11 @@ class App extends Component {
       <div className={"App"}>
         <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
           <NavigationBar />
-
-          <Route path="/" exact component={() => <Dashboard />} />
+          <Route path="/" exact component={Dashboard} />
           <Route
             path="/transactions"
             exact
-            component={() => <FilterableTransactionsTable />}
+            component={FilterableTransactionsTable}
           />
         </BrowserRouter>
       </div>
