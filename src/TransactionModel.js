@@ -44,7 +44,11 @@ export class TransactionModel {
         `${process.env.REACT_APP_WALLET_API_URL}/wallets/${
           this._walletId
         }/transactions`,
-        { type: this._type, amount: this._amount, remark: this._remark }
+        {
+          type: this._type,
+          amount: this._amount,
+          remark: this._remark
+        }
       )
       .then(response => response);
   }
@@ -68,7 +72,7 @@ export class TransactionModel {
     return transactions;
   }
 
-  static async fetchAll(walletId) {
+  static async fetchAll({ walletId }) {
     let transactions = [];
     await axios
       .get(

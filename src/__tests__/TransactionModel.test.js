@@ -60,7 +60,6 @@ describe("TransactionModel", () => {
     it("should be able to get transactions", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
       const walletId = 1;
-
       const model = await TransactionModel.fetch(walletId);
 
       await Promise.resolve();
@@ -69,8 +68,6 @@ describe("TransactionModel", () => {
 
     it("should be able to get all transactions for given wallet Id", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
-      const walletId = 1;
-
       const transactions = await TransactionModel.fetchAll({ walletId: 1 });
 
       await Promise.resolve();

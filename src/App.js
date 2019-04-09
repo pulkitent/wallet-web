@@ -3,7 +3,7 @@ import "./App.css";
 import Dashboard from "./Dashboard";
 import { NavigationBar } from "./NavigationBar";
 import { BrowserRouter, Route } from "react-router-dom";
-import { TransactionsTable } from "./TransactionsTable";
+import FilterableTransactionsTable from "./FilterableTransactionsTable";
 
 class App extends Component {
   render() {
@@ -16,9 +16,7 @@ class App extends Component {
           <Route
             path="/transactions"
             exact
-            component={() => (
-              <TransactionsTable searchText={""} transactions={[]} />
-            )}
+            component={() => <FilterableTransactionsTable />}
           />
         </BrowserRouter>
       </div>
