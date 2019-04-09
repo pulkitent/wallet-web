@@ -149,9 +149,7 @@ describe("TransactionForm", () => {
 
       proceedButton.simulate("click");
 
-      expect(
-        transactionForm.find("#amountError").text()
-      ).toBe("");
+      expect(transactionForm.find("#amountError").text()).toBe("");
     });
 
     it("should not allow a remark with more than 50 characters to be entered", () => {
