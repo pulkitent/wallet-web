@@ -10,7 +10,8 @@ export default class FilterableTransactionsTable extends React.Component {
   }
 
   async componentDidMount() {
-    const transactions = await TransactionModel.fetch(1);
+    let walletId = 1;
+    const transactions = await TransactionModel.fetchAll(walletId);
     this.setState({ transactions: transactions });
   }
 

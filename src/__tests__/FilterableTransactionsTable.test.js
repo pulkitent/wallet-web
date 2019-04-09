@@ -51,8 +51,8 @@ describe("FilterableTransactionsTable", () => {
   });
 
   it("should show transactions", async () => {
-    TransactionModel.fetch = jest.fn();
-    TransactionModel.fetch.mockResolvedValue(transactionsList);
+    TransactionModel.fetchAll = jest.fn();
+    TransactionModel.fetchAll.mockResolvedValue(transactionsList);
     const filterableTable = shallow(<FilterableTransactionsTable />);
 
     await Promise.resolve();
