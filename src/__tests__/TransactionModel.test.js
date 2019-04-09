@@ -4,8 +4,8 @@ import React from "react";
 
 jest.mock("axios");
 const fetchParams = {
-  walletId : 1
-}
+  walletId: 1
+};
 describe("TransactionModel", () => {
   describe("#save", () => {
     it("should be able to call the endpoint on save", () => {
