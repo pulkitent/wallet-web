@@ -80,7 +80,7 @@ describe("TransactionModel", () => {
       await Promise.resolve();
 
       expect(axios.get).toHaveBeenCalledWith(transactionEndpoint);
-  });
+    });
 
     it("should be able to get all transactions for given wallet Id", async () => {
       axios.get.mockResolvedValue(Promise.resolve(response));
